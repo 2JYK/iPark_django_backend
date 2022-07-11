@@ -1,0 +1,152 @@
+[
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "강남구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "강동구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "강북구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "강서구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "관악구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "광진구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "구로구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "금천구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "노원구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "도봉구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "동대문구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "동작구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "마포구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "서대문구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "서초구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "성동구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "성북구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "송파구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "양천구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "영등포구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "용산구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "은평구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "종로구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "중구"
+        }
+    },
+    {
+        "model": "user.region",
+        "fields": {
+            "region_name": "중랑구"
+        }
+    }
+]
