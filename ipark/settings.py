@@ -38,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework_simplejwt',
+
     'corsheaders',
+    'user',
+    'park',
+    'community',
 ]
 
 MIDDLEWARE = [
@@ -147,7 +152,7 @@ CORS_ALLOW_HEADERS = [
     "access-control-allow-origin"
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'user.User'
 
 
 SIMPLE_JWT = {
