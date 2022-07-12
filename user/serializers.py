@@ -17,11 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
         }
         
     def validate(self, data):
-        if not len(data.get("username", "")) >= 6:
-            raise serializers.ValidationError(
-                detail={"error": "username의 길이는 6자리 이상이어야 합니다."}
-            )
-            
+        if data.get("username"):
+            if not len(data.get("username", "")) >= 6:
+                raise serializers.ValidationError(
+                    detail={"error": "username의 길이는 6자리 이상이어야 합니다."}
+                )
+                
         if not data.get("email", "").endswith(EMAIL):
             raise serializers.ValidationError(
                 detail={"error": "네이버, 구글, 카카오 이메일만 가입할 수 있습니다."}
@@ -43,5 +44,14 @@ class UserSerializer(serializers.ModelSerializer):
         
         return user
         
-    
+    def update(self, instance, validated_data):
+
+        for key, value in validated_data.items():
+            if key == "password":
+                instance.set_password(value)
+                continue
+            setattr(instance, key, value)
+        instance.save()
+        
+        return instance
     
