@@ -20,8 +20,8 @@ class Park(models.Model):
     p_img = models.CharField("이미지", max_length=300)
     longitude = models.CharField("X좌표", max_length=50)
     latitude = models.CharField("Y좌표", max_length=50)
-    created_at = models.DateTimeField("공원 정보 생성시간", auto_now_add=True)
-    updated_at = models.DateTimeField("공원 정보 수정시간", auto_now=True)
+    created_at = models.DateField("공원 정보 생성시간", auto_now_add=True)
+    updated_at = models.DateField("공원 정보 수정시간", auto_now=True)
 
     def __str__(self):
         return self.p_park
