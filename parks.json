@@ -1,6 +1,7 @@
-{
-    "DATA": [
-        {
+[
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "남산공원",
             "p_addr": "서울특별시 중구 삼일대로 231(예장동)",
             "p_zone": "중구",
@@ -11,11 +12,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1884",
             "longitude": "126.9903773",
             "latitude": "37.5501402",
-            "search_options": [
-                "자연친화적", "조경", "운동", "역사", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "길동생태공원",
             "p_addr": "서울특별시 강동구 천호대로 1291(길동생태공원) ",
             "p_zone": "강동구",
@@ -26,11 +32,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1885",
             "longitude": "127.1547791",
             "latitude": "37.5403935",
-            "search_options": [
-                "조경", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서울대공원",
             "p_addr": "경기도 과천시 대공원광장로 102",
             "p_zone": "과천시",
@@ -41,11 +52,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1886",
             "longitude": "127.0198465",
             "latitude": "37.4264494",
-            "search_options": [
-                "조경", "놀이공원", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 3, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서울숲",
             "p_addr": "서울특별시 성동구 뚝섬로 273 (성수동1가) ",
             "p_zone": "성동구",
@@ -56,11 +72,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1887",
             "longitude": "127.0417982",
             "latitude": "37.5430717",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "월드컵공원",
             "p_addr": "서울특별시 마포구 하늘공원로 84(월드컵공원)",
             "p_zone": "마포구",
@@ -71,11 +92,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1888",
             "longitude": "126.878907",
             "latitude": "37.571805",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "광화문시민열린마당",
             "p_addr": "서울특별시 종로구 세종로 76-2",
             "p_zone": "종로구",
@@ -86,11 +112,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1890",
             "longitude": "126.9780227",
             "latitude": "37.5750449",
-            "search_options": [
-                "조경", "역사", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "진관근린공원(구파발폭포)",
             "p_addr": "서울특별시 은평구 진관동 393",
             "p_zone": "은평구",
@@ -101,11 +132,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1891",
             "longitude": "126.9192155",
             "latitude": "37.6370244",
-            "search_options": [
-                "조경", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "중마루근린공원",
             "p_addr": "서울특별시 영등포구 영등포동2가 222",
             "p_zone": "영등포구",
@@ -116,11 +152,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1893",
             "longitude": "126.9112668",
             "latitude": "37.519832",
-            "search_options": [
-                "조경", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "응봉공원",
             "p_addr": "서울특별시 성동구 금호동1가 산1-72",
             "p_zone": "성동구",
@@ -131,11 +172,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1894",
             "longitude": "127.0217653",
             "latitude": "37.5572281",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "매화근린공원",
             "p_addr": "서울특별시 강서구 등촌동 630-14",
             "p_zone": "강서구",
@@ -146,11 +192,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1895",
             "longitude": "126.86115",
             "latitude": "37.5575833",
-            "search_options": [
-                "조경", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "성수근린공원",
             "p_addr": "서울특별시 성동구 성수2가 3동 302-25",
             "p_zone": "성동구",
@@ -161,11 +212,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1896",
             "longitude": "127.0524023",
             "latitude": "37.5448144",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "샛마을근린공원",
             "p_addr": "서울특별시 강동구 명일1동 288",
             "p_zone": "강동구",
@@ -176,11 +232,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1897",
             "longitude": "127.1471618",
             "latitude": "37.5504807",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "여의도근린공원",
             "p_addr": "서울특별시 영등포구 여의공원로 68 (여의도동)",
             "p_zone": "영등포구",
@@ -191,11 +252,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1898",
             "longitude": "126.922377",
             "latitude": "37.526129",
-            "search_options": [
-                "조경", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "간데메근린공원",
             "p_addr": "서울특별시 동대문구 서울시립대로2길 59(간데메공원)",
             "p_zone": "동대문구",
@@ -206,11 +272,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1899",
             "longitude": "127.0488644",
             "latitude": "37.5732438",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "훈련원근린공원",
             "p_addr": "서울특별시 중구 을지로 227",
             "p_zone": "중구",
@@ -221,11 +292,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1900",
             "longitude": "127.0038188",
             "latitude": "37.5675245",
-            "search_options": [
-                "조경", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "영등포근린공원",
             "p_addr": "서울특별시 영등포구 신길로 275",
             "p_zone": "영등포구",
@@ -236,11 +312,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1901",
             "longitude": "126.910662",
             "latitude": "37.515423",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "보라매근린공원",
             "p_addr": "서울특별시 동작구 여의대방로20길 33(보라매공원)",
             "p_zone": "동작구",
@@ -251,11 +332,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1902",
             "longitude": "126.918289",
             "latitude": "37.492333",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "어린이대공원",
             "p_addr": "서울특별시 광진구 능동로 216(어린이대공원)",
             "p_zone": "광진구",
@@ -266,11 +352,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1903",
             "longitude": "127.0809212",
             "latitude": "37.5498987",
-            "search_options": [
-                "조경", "놀이공원", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 3, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "천호근린공원",
             "p_addr": "서울특별시 강동구 올림픽로 702(천호공원)",
             "p_zone": "강동구",
@@ -281,11 +372,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1904",
             "longitude": "127.1263451",
             "latitude": "37.5444741",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "용산가족공원",
             "p_addr": "서울특별시 용산구 서빙고로 185",
             "p_zone": "용산구",
@@ -296,11 +392,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1905",
             "longitude": "126.983335",
             "latitude": "37.522226",
-            "search_options": [
-                "조경", "운동", "놀이공원", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 3, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "독립근린공원",
             "p_addr": "서울특별시 서대문구 통일로251(독립공원)",
             "p_zone": "서대문구",
@@ -311,11 +412,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1907",
             "longitude": "126.956771",
             "latitude": "37.5738289",
-            "search_options": [
-                "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "낙산근린공원",
             "p_addr": "서울특별시 종로구 낙산길 41 (우) 03085",
             "p_zone": "종로구",
@@ -326,11 +432,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1908",
             "longitude": "127.007587",
             "latitude": "37.580477",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "양재시민의숲",
             "p_addr": "서울특별시 서초구 매헌로 99 (양재동)",
             "p_zone": "서초구",
@@ -341,11 +452,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1909",
             "longitude": "127.035042",
             "latitude": "37.471225",
-            "search_options": [
-                "조경", "운동", "역사", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "관악산도시자연",
             "p_addr": "서울특별시 관악구 관악로 1(관악산공원)",
             "p_zone": "관악구",
@@ -356,11 +472,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1910",
             "longitude": "126.96413",
             "latitude": "37.445208",
-            "search_options": [
-                "역사"
-            ]
-        },
-        {
+            "option": [
+                4
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "효창근린공원",
             "p_addr": "서울특별시 용산구 효창원로 177-18",
             "p_zone": "용산구",
@@ -371,11 +492,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1912",
             "longitude": "126.95993",
             "latitude": "37.545234",
-            "search_options": [
-                "조경", "운동", "역사", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "감로천생태공원(관악산)",
             "p_addr": "서울특별시 금천구 독산4동 371?375 373일대",
             "p_zone": "금천구",
@@ -386,11 +512,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1913",
             "longitude": "126.9079509",
             "latitude": "37.469625",
-            "search_options": [
-                "조경", "운동"
-            ]
-        },
-        {
+            "option": [
+                1, 2
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "개운산근린공원",
             "p_addr": "서울특별시 성북구 북악산로 949-73(돈암동 6-1)",
             "p_zone": "성북구",
@@ -401,11 +532,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1914",
             "longitude": "127.0252858",
             "latitude": "37.5965837",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "개웅산근린공원",
             "p_addr": "서울특별시 구로구 오류동 산13-1",
             "p_zone": "구로구",
@@ -416,11 +552,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1915",
             "longitude": "126.8485734",
             "latitude": "37.4888943",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "경희궁",
             "p_addr": "서울특별시 종로구 새문안로 55(신문로2가 2-1)",
             "p_zone": "종로구",
@@ -431,11 +572,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1918",
             "longitude": "126.9685341",
             "latitude": "37.570773",
-            "search_options": [
-                "조경", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "국립현충원",
             "p_addr": "서울특별시 동작구 사당2동 산41-2",
             "p_zone": "동작구",
@@ -446,11 +592,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1919",
             "longitude": "126.9736849",
             "latitude": "37.4998621",
-            "search_options": [
-                "조경", "역사", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "계남근린공원",
             "p_addr": "서울특별시 양천구 신정동 산44-2일대",
             "p_zone": "양천구",
@@ -461,11 +612,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1920",
             "longitude": "126.8479643",
             "latitude": "37.5138358",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "고척근린공원",
             "p_addr": "서울특별시 구로구 고척로45길 39(고척공원)",
             "p_zone": "구로구",
@@ -476,11 +632,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1921",
             "longitude": "126.8521495",
             "latitude": "37.5042944",
-            "search_options": [
-                "조경", "운동", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "파리근린공원",
             "p_addr": "서울특별시 양천구 목동동로 363 ",
             "p_zone": "양천구",
@@ -491,11 +652,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1922",
             "longitude": "126.8763932",
             "latitude": "37.5349739",
-            "search_options": [
-                "조경", "운동", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "허준공원",
             "p_addr": "서울특별시 강서구 허준로5길 42",
             "p_zone": "강서구",
@@ -506,11 +672,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1923",
             "longitude": "126.8526745",
             "latitude": "37.5679874",
-            "search_options": [
-                "조경", "역사", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "궁동근린공원",
             "p_addr": "서울특별시 서대문구 성산로7길 19-24(궁동공원) ",
             "p_zone": "서대문구",
@@ -521,11 +692,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1924",
             "longitude": "126.9229851",
             "latitude": "37.5690506",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "궁산근린공원",
             "p_addr": "서울특별시 강서구 가양동 산4-7",
             "p_zone": "강서구",
@@ -536,11 +712,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1925",
             "longitude": "126.838952",
             "latitude": "37.5735645",
-            "search_options": [
-                "조경", "역사", "교양", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 6, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "까치산근린공원",
             "p_addr": "서울특별시 동작구 사당동 산32",
             "p_zone": "동작구",
@@ -551,11 +732,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1926",
             "longitude": "126.9640735",
             "latitude": "37.4845836",
-            "search_options": [
-                "역사"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "꿩고개근린공원",
             "p_addr": "서울특별시 강서구 방화동 산110",
             "p_zone": "강서구",
@@ -566,11 +752,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1927",
             "longitude": "126.8157075",
             "latitude": "37.5801585",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "노량진공원",
             "p_addr": "서울특별시 동작구 여의대방로 15-45(여의대방로36길 71)",
             "p_zone": "동작구",
@@ -581,11 +772,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1928",
             "longitude": "126.928607",
             "latitude": "37.510234",
-            "search_options": [
-                "운동", "역사", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                2, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "답십리근린공원",
             "p_addr": "서울특별시 동대문구 답십리로 209(답십리공원) ",
             "p_zone": "동대문구",
@@ -596,11 +792,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1929",
             "longitude": "127.0626512",
             "latitude": "37.5750896",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "대모산도시자연",
             "p_addr": "서울특별시 강남구 광평로10길 30-71(대모산공원) ",
             "p_zone": "강남구",
@@ -611,11 +812,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1930",
             "longitude": "127.0809639",
             "latitude": "37.4796489",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "탑골근린공원",
             "p_addr": "서울특별시 종로구 종로 99",
             "p_zone": "종로구",
@@ -626,11 +832,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1931",
             "longitude": "126.9882853",
             "latitude": "37.5710052",
-            "search_options": [
-                "조경", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "갈산근린공원",
             "p_addr": "서울특별시 양천구 신정동 162-56",
             "p_zone": "양천구",
@@ -641,11 +852,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1932",
             "longitude": "126.8689146",
             "latitude": "37.5082119",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "천마근린공원",
             "p_addr": "서울특별시 송파구 마천동 산 1-1",
             "p_zone": "송파구",
@@ -656,11 +872,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1936",
             "longitude": "127.1586644",
             "latitude": "37.5005173",
-            "search_options": [
-                "조경", "운동"
-            ]
-        },
-        {
+            "option": [
+                1, 2
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "도곡근린공원",
             "p_addr": "서울특별시 강남구 도곡동 산31-1",
             "p_zone": "강남구",
@@ -671,11 +892,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1937",
             "longitude": "127.0450338",
             "latitude": "37.4903127",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "도산근린공원",
             "p_addr": "서울특별시 강남구 도산대로45길 20(도산공원)",
             "p_zone": "강남구",
@@ -686,11 +912,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1938",
             "longitude": "127.0350296",
             "latitude": "37.5246752",
-            "search_options": [
-                "조경", "운동", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "청량공원",
             "p_addr": "서울특별시 성북구 화랑로18가길 50",
             "p_zone": "성북구",
@@ -701,11 +932,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1939",
             "longitude": "127.0511145",
             "latitude": "37.6020055",
-            "search_options": [
-                "조경", "운동", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "초안산근린공원",
             "p_addr": "서울특별시 도봉구 창동 산157",
             "p_zone": "도봉구",
@@ -716,11 +952,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1940",
             "longitude": "127.0455446",
             "latitude": "37.648316",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "동명근린공원",
             "p_addr": "서울특별시 강동구 고덕2동 229",
             "p_zone": "강동구",
@@ -731,11 +972,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1911",
             "longitude": "127.1676703",
             "latitude": "37.5598341",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "마로니에공원",
             "p_addr": "서울특별시 종로구 대학로8길 1",
             "p_zone": "종로구",
@@ -746,11 +992,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1941",
             "longitude": "127.0027886",
             "latitude": "37.5802295",
-            "search_options": [
-                "조경", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "자매근린공원",
             "p_addr": "서울특별시 영등포구 의사당대로 166 (우) 07324",
             "p_zone": "영등포구",
@@ -761,11 +1012,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1942",
             "longitude": "126.9302895",
             "latitude": "37.5177329",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "장지근린공원",
             "p_addr": "서울특별시 송파구 장지동 산 11번지",
             "p_zone": "송파구",
@@ -776,11 +1032,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1943",
             "longitude": "127.1387",
             "latitude": "37.4957083",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "명일근린공원",
             "p_addr": "서울특별시 강동구 상일동 135",
             "p_zone": "강동구",
@@ -791,11 +1052,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1944",
             "longitude": "127.1613641",
             "latitude": "37.5537143",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "방화근린공원",
             "p_addr": "서울특별시 강서구 금낭화로 176(방화공원)",
             "p_zone": "강서구",
@@ -806,11 +1072,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1848",
             "longitude": "126.8132285",
             "latitude": "37.5819812",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "아시아근린공원",
             "p_addr": "서울특별시 송파구 올림픽로 44 (잠실동)",
             "p_zone": "송파구",
@@ -821,11 +1092,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1849",
             "longitude": "127.0762885",
             "latitude": "37.5102779",
-            "search_options": [
-                "조경", "운동", "놀이공원",  "역사", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 3,  4, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "배봉산근린공원",
             "p_addr": "서울특별시 동대문구 한천로43길 12-14(배봉산공원) ",
             "p_zone": "동대문구",
@@ -836,11 +1112,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1850",
             "longitude": "127.0641623",
             "latitude": "37.5812324",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "안산도시자연",
             "p_addr": "서울특별시 서대문구 홍제동 산33-98",
             "p_zone": "서대문구",
@@ -851,11 +1132,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1851",
             "longitude": "126.9390273",
             "latitude": "37.5798246",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "염창근린공원",
             "p_addr": "서울특별시 강서구 염창동 산24-1",
             "p_zone": "강서구",
@@ -866,11 +1152,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1852",
             "longitude": "126.8689817",
             "latitude": "37.5579702",
-            "search_options": [
-                "조경", "운동"
-            ]
-        },
-        {
+            "option": [
+                1, 2
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "백련근린공원",
             "p_addr": "서울특별시 서대문구 통일로 507-22(백련공원) ",
             "p_zone": "서대문구",
@@ -881,11 +1172,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1860",
             "longitude": "126.928616",
             "latitude": "37.5879662",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "오금근린공원",
             "p_addr": "서울특별시 송파구 오금로 363 오금근린공원 ",
             "p_zone": "송파구",
@@ -896,11 +1192,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1861",
             "longitude": "127.1323957",
             "latitude": "37.5038715",
-            "search_options": [
-                "조경", "운동", "역사", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "오동근린공원",
             "p_addr": "서울특별시 강북구 번동 산20-1",
             "p_zone": "강북구",
@@ -911,11 +1212,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1862",
             "longitude": "127.0317269",
             "latitude": "37.6327957",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "봉산도시자연",
             "p_addr": "서울특별시 은평구 구산동 산61",
             "p_zone": "은평구",
@@ -926,11 +1232,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1863",
             "longitude": "126.9020153",
             "latitude": "37.604071",
-            "search_options": [
-                "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "온수도시자연공원",
             "p_addr": "서울특별시 구로구 개봉동 산2-60",
             "p_zone": "구로구",
@@ -941,11 +1252,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1864",
             "longitude": "126.83695",
             "latitude": "37.5002598",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "봉은공원",
             "p_addr": "서울특별시 강남구 삼성동 75",
             "p_zone": "강남구",
@@ -956,11 +1272,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1865",
             "longitude": "127.0554961",
             "latitude": "37.5139026",
-            "search_options": [
-                "조경", "역사"
-            ]
-        },
-        {
+            "option": [
+                1, 4
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "올림픽공원",
             "p_addr": "서울특별시 송파구 올림픽로 424 (방이동)",
             "p_zone": "송파구",
@@ -971,11 +1292,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1866",
             "longitude": "127.122959",
             "latitude": "37.520934",
-            "search_options": [
-                "조경", "운동", "역사", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "와룡근린공원",
             "p_addr": "서울특별시 종로구 와룡공원길 192 (우) 03063",
             "p_zone": "종로구",
@@ -986,11 +1312,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1867",
             "longitude": "126.9901672",
             "latitude": "37.5907944",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "봉화산근린공원",
             "p_addr": "서울특별시 중랑구 묵동 산46-1",
             "p_zone": "중랑구",
@@ -1001,11 +1332,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1868",
             "longitude": "127.0923625",
             "latitude": "37.6106404",
-            "search_options": [
-                "역사"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "북악산도시자연공원",
             "p_addr": "서울특별시 종로구 부암동 산2-6",
             "p_zone": "종로구",
@@ -1016,11 +1352,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1869",
             "longitude": "126.9737295",
             "latitude": "37.5929992",
-            "search_options": [
-                "조경", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "북한산국립공원",
             "p_addr": "서울특별시 종로구 은평구 서대문구 성북구 강북구 도봉구 일대 경기도 의정부 양주군 고양시 일대",
             "p_zone": "강북구",
@@ -1031,11 +1372,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1870",
             "longitude": "127.000938",
             "latitude": "37.624549",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "외국인묘지공원",
             "p_addr": "서울특별시 마포구 양화진길 46(외국인묘지공원)",
             "p_zone": "마포구",
@@ -1046,11 +1392,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1871",
             "longitude": "126.911414",
             "latitude": "37.546797",
-            "search_options": [
-                "조경", "역사", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "불광근린공원",
             "p_addr": "서울특별시 은평구 불광동 산33-1",
             "p_zone": "은평구",
@@ -1061,11 +1412,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1872",
             "longitude": "126.9298962",
             "latitude": "37.6188016",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "불암산도시자연",
             "p_addr": "서울특별시 노원구 한글비석로12길 51-33(불암산공원) ",
             "p_zone": "노원구",
@@ -1076,11 +1432,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1873",
             "longitude": "127.0952714",
             "latitude": "37.6636719",
-            "search_options": [
-                "편익"
-            ]
-        },
-        {
+            "option": [
+                7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "용마폭포공원",
             "p_addr": "서울특별시 중랑구 면목동 산1-4 ",
             "p_zone": "중랑구",
@@ -1091,11 +1452,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1874",
             "longitude": "127.0905888",
             "latitude": "37.5731968",
-            "search_options": [
-                "조경", "운동", "놀이공원", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 3, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "사육신공원",
             "p_addr": "서울특별시 동작구 노량진로 191",
             "p_zone": "동작구",
@@ -1106,11 +1472,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1875",
             "longitude": "126.948636",
             "latitude": "37.5137049",
-            "search_options": [
-                "조경", "역사"
-            ]
-        },
-        {
+            "option": [
+                1, 4
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "용왕산근린공원",
             "p_addr": "서울특별시 양천구 목동 199-51",
             "p_zone": "양천구",
@@ -1121,11 +1492,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1876",
             "longitude": "126.8783125",
             "latitude": "37.5429593",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "사직근린공원",
             "p_addr": "서울특별시 종로구 사직로9길 5",
             "p_zone": "종로구",
@@ -1136,11 +1512,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1877",
             "longitude": "126.9674018",
             "latitude": "37.5759864",
-            "search_options": [
-                "조경", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "우장산근린공원",
             "p_addr": "서울특별시 강서구 내발산동 산4-5",
             "p_zone": "강서구",
@@ -1151,11 +1532,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1878",
             "longitude": "126.844932",
             "latitude": "37.5541932",
-            "search_options": [
-                "조경", "운동", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "삼일근린공원",
             "p_addr": "서울특별시 동작구 사당동 산24-17",
             "p_zone": "동작구",
@@ -1166,11 +1552,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1879",
             "longitude": "126.9743686",
             "latitude": "37.4860183",
-            "search_options": [
-                "조경", "운동", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "삼청근린공원",
             "p_addr": "서울특별시 종로구 북촌로 134-1 (우) 03050",
             "p_zone": "종로구",
@@ -1181,11 +1572,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1880",
             "longitude": "126.9842875",
             "latitude": "37.5895821",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "인왕산도시자연공원",
             "p_addr": "서울특별시 종로구 옥인동 산 3-1 ",
             "p_zone": "종로구",
@@ -1196,11 +1592,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1881",
             "longitude": "126.9578438",
             "latitude": "37.5849001",
-            "search_options": [
-                "조경", "운동", "역사", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "상도근린공원",
             "p_addr": "서울특별시 동작구 성대로6사길 27-6(상도공원) ",
             "p_zone": "동작구",
@@ -1211,11 +1612,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1882",
             "longitude": "126.9385469",
             "latitude": "37.492299",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "일자산도시자연",
             "p_addr": "서울특별시 강동구 동남로 660(일자산공원)",
             "p_zone": "강동구",
@@ -1226,11 +1632,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1883",
             "longitude": "127.1574587",
             "latitude": "37.5431657",
-            "search_options": [
-                "조경", "운동", "역사", "놀이공원", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 3, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "쌍문근린공원",
             "p_addr": "서울특별시 도봉구 쌍문동 산80",
             "p_zone": "도봉구",
@@ -1241,11 +1652,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1853",
             "longitude": "127.0271316",
             "latitude": "37.6531456",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "수락산도시자연",
             "p_addr": "서울특별시 노원구 상계동 산3-1",
             "p_zone": "노원구",
@@ -1256,11 +1672,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1855",
             "longitude": "127.0813633",
             "latitude": "37.699232",
-            "search_options": [
-                "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "송파나루근린공원(석촌호수)",
             "p_addr": "서울특별시 송파구 잠실로 148 (잠실동) ",
             "p_zone": "송파구",
@@ -1271,11 +1692,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1856",
             "longitude": "127.0983002",
             "latitude": "37.5069328",
-            "search_options": [
-                "조경", "놀이공원", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 3, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "선유도근린공원",
             "p_addr": "서울특별시 영등포구 선유로 343 (당산동 1) 선유도공원관리사무소",
             "p_zone": "영등포구",
@@ -1286,11 +1712,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1857",
             "longitude": "126.90014",
             "latitude": "37.543418",
-            "search_options": [
-                "조경", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "손기정체육공원",
             "p_addr": "서울특별시 중구 손기정로 101 ",
             "p_zone": "중구",
@@ -1301,11 +1732,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1858",
             "longitude": "126.9652702",
             "latitude": "37.5560189",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "성북근린공원",
             "p_addr": "서울특별시 성북구 돈암동 616-1055",
             "p_zone": "성북구",
@@ -1316,11 +1752,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1859",
             "longitude": "127.0078625",
             "latitude": "37.5948509",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "봉제산공원",
             "p_addr": "서울특별시 강서구 화곡동 산41-6",
             "p_zone": "강서구",
@@ -1331,11 +1772,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1470",
             "longitude": "126.8517836",
             "latitude": "37.5421979",
-            "search_options": [
-                "조경", "운동", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서울창포원",
             "p_addr": "서울특별시 도봉구 마들로 916(서울창포원) ",
             "p_zone": "도봉구",
@@ -1346,11 +1792,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1471",
             "longitude": "127.047938",
             "latitude": "37.689585",
-            "search_options": [
-                "조경", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "북서울꿈의숲",
             "p_addr": "서울특별시 강북구 월계로 173",
             "p_zone": "강북구",
@@ -1361,11 +1812,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1472",
             "longitude": "127.0407344",
             "latitude": "37.6233355",
-            "search_options": [
-                "조경", "역사", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서서울호수공원",
             "p_addr": "서울특별시 양천구 남부순환로64길 20 (신월동)",
             "p_zone": "양천구",
@@ -1376,11 +1832,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1473",
             "longitude": "126.8304789",
             "latitude": "37.5278392",
-            "search_options": [
-                "조경", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "중랑캠핑숲",
             "p_addr": "서울특별시 중랑구 송림길 160(중랑캠핑숲)/중랑구 망우동 74(청소년체험의숲)",
             "p_zone": "중랑구",
@@ -1391,11 +1852,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1474",
             "longitude": "127.1093075",
             "latitude": "37.6049896",
-            "search_options": [
-                "조경", "운동", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "솔밭근린공원",
             "p_addr": "서울특별시 강북구 우이동 80번지 일대",
             "p_zone": "강북구",
@@ -1406,11 +1872,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1526",
             "longitude": "127.0116241",
             "latitude": "37.652331",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "금천체육공원(관악산)",
             "p_addr": "서울특별시 금천구 독산동 산118-4(금천체육공원)",
             "p_zone": "금천구",
@@ -1421,11 +1892,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1527",
             "longitude": "126.908681",
             "latitude": "37.468164",
-            "search_options": [
-               "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "금천폭포근린공원",
             "p_addr": "서울특별시 금천구 시흥대로38길 61(시흥동 937-2)",
             "p_zone": "금천구",
@@ -1436,11 +1912,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1528",
             "longitude": "126.9040127",
             "latitude": "37.4468663",
-            "search_options": [
-                "조경", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "만수천공원(관악산)",
             "p_addr": "서울특별시 금천구 독산동 산8 일대",
             "p_zone": "금천구",
@@ -1451,11 +1932,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1529",
             "longitude": "126.9090028",
             "latitude": "37.4734274",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "발바닥공원",
             "p_addr": "서울특별시 도봉구 시루봉로6길 33",
             "p_zone": "도봉구",
@@ -1466,11 +1952,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1530",
             "longitude": "127.031982",
             "latitude": "37.6597135",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "월천근린공원",
             "p_addr": "서울특별시 도봉구 창동 28번지",
             "p_zone": "도봉구",
@@ -1481,11 +1972,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1531",
             "longitude": "127.0509895",
             "latitude": "37.6473889",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "용두근린공원",
             "p_addr": "서울특별시 동대문구 용두동 34-1번지 일대",
             "p_zone": "동대문구",
@@ -1496,11 +1992,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1532",
             "longitude": "127.0390042",
             "latitude": "37.5732791",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "상암근린공원",
             "p_addr": "서울특별시 마포구 상암동 1761",
             "p_zone": "마포구",
@@ -1511,11 +2012,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1533",
             "longitude": "126.8859012",
             "latitude": "37.5760106",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "와우근린공원",
             "p_addr": "서울특별시 마포구 창전동 3-193번지 일대(홍익대 뒷산)",
             "p_zone": "마포구",
@@ -1526,11 +2032,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1534",
             "longitude": "126.9289936",
             "latitude": "37.5517298",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "금호근린공원",
             "p_addr": "서울특별시 성동구 장터1길 18",
             "p_zone": "성동구",
@@ -1541,11 +2052,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1535",
             "longitude": "127.0189457",
             "latitude": "37.5494726",
-            "search_options": [
-                "조경", "운동", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "달맞이근린공원",
             "p_addr": "서울특별시 성동구 옥수동 산1-1",
             "p_zone": "성동구",
@@ -1556,11 +2072,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1536",
             "longitude": "127.0212054",
             "latitude": "37.543564",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "문정근린공원",
             "p_addr": "서울특별시 송파구 문정동 18-4",
             "p_zone": "송파구",
@@ -1571,11 +2092,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1537",
             "longitude": "127.1275819",
             "latitude": "37.4862156",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "문화예술공원",
             "p_addr": "서울특별시 서초구 바우뫼로12길 40 (양재동)",
             "p_zone": "서초구",
@@ -1586,11 +2112,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1539",
             "longitude": "127.030517",
             "latitude": "37.467654",
-            "search_options": [
-                "조경", "운동", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "세종로공원",
             "p_addr": "서울특별시 종로구 세종대로 189 (우) 03172",
             "p_zone": "종로구",
@@ -1601,11 +2132,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1698",
             "longitude": "126.9758875",
             "latitude": "37.5735",
-            "search_options": [
-                "조경", "운동", "역사", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "샘말공원(관악산)",
             "p_addr": "서울특별시 관악구 대학동 산63-1일대 샘말공원",
             "p_zone": "관악구",
@@ -1616,11 +2152,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1699",
             "longitude": "126.938511",
             "latitude": "37.4642128",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "초안산생태공원",
             "p_addr": "서울특별시 도봉구 창동 산24",
             "p_zone": "도봉구",
@@ -1631,11 +2172,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1708",
             "longitude": "127.0405382",
             "latitude": "37.6479483",
-            "search_options": [
-                "조경", "운동", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "푸른수목원",
             "p_addr": "서울특별시 구로구 연동로 240(항동81-1) 푸른수목원관리사무소",
             "p_zone": "구로구",
@@ -1646,11 +2192,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1718",
             "longitude": "126.82407",
             "latitude": "37.483029",
-            "search_options": [
-                "조경", "학습테마", "교양", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 5, 6, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서오능도시자연",
             "p_addr": "서울특별시 은평구 구파발동 갈현동 진관내동",
             "p_zone": "은평구",
@@ -1661,11 +2212,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1726",
             "longitude": "126.9134338",
             "latitude": "37.6374823",
-            "search_options": [
-                "조경", "운동", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "청계산도시자연",
             "p_addr": "서울특별시 서초구 원지동 산 33",
             "p_zone": "서초구",
@@ -1676,11 +2232,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1736",
             "longitude": "127.0424726",
             "latitude": "37.4224347",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "개화근린공원",
             "p_addr": "서울특별시 강서구 개화동 산17",
             "p_zone": "강서구",
@@ -1691,11 +2252,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1730",
             "longitude": "126.8068278",
             "latitude": "37.5813917",
-            "search_options": [
-                "조경", "운동", "역사", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 4, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "아차산생태공원",
             "p_addr": "서울특별시 광진구 광장동 370",
             "p_zone": "광진구",
@@ -1706,11 +2272,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1731",
             "longitude": "127.1010031",
             "latitude": "37.5517142",
-            "search_options": [
-                "조경", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "인능산도시자연",
             "p_addr": "서울특별시 서초구 내곡동 산12-404",
             "p_zone": "서초구",
@@ -1721,11 +2292,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1732",
             "longitude": "127.0666632",
             "latitude": "37.4482109",
-            "search_options": [
-                "자연친화적"
-            ]
-        },
-        {
+            "option": [
+                
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "구룡산",
             "p_addr": "서울특별시 서초구 염곡동 산25-1",
             "p_zone": "서초구",
@@ -1736,11 +2312,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1733",
             "longitude": "127.061567",
             "latitude": "37.4689473",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "우면산도시자연",
             "p_addr": "서울특별시 서초구 우면동 산35-1",
             "p_zone": "서초구",
@@ -1751,11 +2332,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1673",
             "longitude": "127.0091324",
             "latitude": "37.470484",
-            "search_options": [
-                "조경", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "향림근린공원",
             "p_addr": "서울특별시 은평구 진관동 산55",
             "p_zone": "은평구",
@@ -1766,11 +2352,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1734",
             "longitude": "126.9240693",
             "latitude": "37.6293824",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "신사근린공원",
             "p_addr": "서울특별시 은평구 신사동 산80-4",
             "p_zone": "은평구",
@@ -1781,11 +2372,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1735",
             "longitude": "126.9102948",
             "latitude": "37.5920771",
-            "search_options": [
-                "조경", "역사", "학습테마", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 5, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "문화역 서울284",
             "p_addr": "서울특별시 중구 통일로 1 서울역",
             "p_zone": "중구",
@@ -1796,11 +2392,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1722",
             "longitude": "126.9715923",
             "latitude": "37.5558722",
-            "search_options": [
-                "역사", "학습테마", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                4, 5, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "광평근린공원",
             "p_addr": "서울특별시 강남구 수서동 산10-1",
             "p_zone": "강남구",
@@ -1811,11 +2412,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1946",
             "longitude": "127.092184",
             "latitude": "37.4880445",
-            "search_options": [
-                "조경", "역사"
-            ]
-        },
-        {
+            "option": [
+                1, 4
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "청담근린공원",
             "p_addr": "서울특별시 강남구 청담동 66",
             "p_zone": "강남구",
@@ -1826,11 +2432,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1948",
             "longitude": "127.052453",
             "latitude": "37.5213259",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "허브천문공원",
             "p_addr": "서울특별시 강동구 둔촌동 산94",
             "p_zone": "강동구",
@@ -1841,11 +2452,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1917",
             "longitude": "127.1533951",
             "latitude": "37.5372715",
-            "search_options": [
-                "조경", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "연신내물빛공원",
             "p_addr": "서울특별시 은평구 통일로 849",
             "p_zone": "은평구",
@@ -1856,11 +2472,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1737",
             "longitude": "126.9207354",
             "latitude": "37.619052",
-            "search_options": [
-                "조경"
-            ]
-        },
-        {
+            "option": [
+                1
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "나들이근린공원",
             "p_addr": "서울특별시 중구 망우동 산 30-7 일대",
             "p_zone": "중랑구",
@@ -1871,11 +2492,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1739",
             "longitude": "127.113261",
             "latitude": "37.6054218",
-            "search_options": [
-                "조경", "역사", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "숭인근린공원",
             "p_addr": "서울특별시 종로구 숭인동 58",
             "p_zone": "종로구",
@@ -1886,11 +2512,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1740",
             "longitude": "127.0178267",
             "latitude": "37.5764419",
-            "search_options": [
-                "조경", "운동"
-            ]
-        },
-        {
+            "option": [
+                1, 2
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서일대뒷산공원",
             "p_addr": "서울특별시 중랑구 면목동 산19",
             "p_zone": "중랑구",
@@ -1901,11 +2532,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1741",
             "longitude": "127.0987817",
             "latitude": "37.5877155",
-            "search_options": [
-                "조경", "역사", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "용마도시자연(사가정공원)",
             "p_addr": "서울특별시 중랑구 면목7동 산50 ",
             "p_zone": "중랑구",
@@ -1916,11 +2552,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1947",
             "longitude": "127.095997",
             "latitude": "37.5797622",
-            "search_options": [
-                "조경", "운동", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "문화비축기지",
             "p_addr": "서울특별시 마포구 증산로 87",
             "p_zone": "마포구",
@@ -1931,11 +2572,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1945",
             "longitude": "126.8932455",
             "latitude": "37.57171848",
-            "search_options": [
-                "역사", "학습테마", "편익", "주차장"
-            ]
-        },
-        {
+            "option": [
+                4, 5, 7, 8
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "경춘선숲길",
             "p_addr": "노원구 공릉2동 산 82-2",
             "p_zone": "노원구",
@@ -1946,11 +2592,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1906",
             "longitude": "127.076482",
             "latitude": "37.627077",
-            "search_options": [
-                "조경", "역사", "교양", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 4, 6, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "율현공원",
             "p_addr": "서울특별시 강남구 율현동 밤고개로24길(율현동 56)",
             "p_zone": "강남구",
@@ -1961,11 +2612,16 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1738",
             "longitude": "127.115594",
             "latitude": "37.472332",
-            "search_options": [
-                "조경", "운동", "편익"
-            ]
-        },
-        {
+            "option": [
+                1, 2, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
             "p_park": "서울로7017",
             "p_addr": "서울로7017",
             "p_zone": "중구",
@@ -1976,9 +2632,11 @@
             "p_img": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1477",
             "longitude": "",
             "latitude": "",
-            "search_options": [
-                "조경", "편익"
-            ]
+            "option": [
+                1, 7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
         }
-    ]
-}
+    }
+]
