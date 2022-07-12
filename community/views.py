@@ -6,7 +6,10 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from community.serializers import ArticleSerializer
+from community.serializers import ArticleCommentSerializer
+
 from community.models import Article as ArticleModel
+from community.models import ArticleComment as ArticleCommentModel
 
 
 class CommunityView(APIView):
@@ -27,4 +30,13 @@ class CommunityView(APIView):
         if article_serializer.is_valid():
             article_serializer.save()
             return Response(article_serializer, status=status.HTTP_200_OK)
-        return Response(article_serializer, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(article_serializer, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommentView(APIView):
+    def get(self, request):
+        comment = ArticleCommentModel.objects.all()
+        serialized_data = ArticleCommentSerializer(comment, many=True).data
+
+        return Response(serialized_data, status=status.HTTP_200_OK)
