@@ -1,0 +1,50 @@
+[
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "조경"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "운동"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "놀이공원"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "역사"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "학습테마"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "교양"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "편익"
+        }
+    },
+    {
+        "model": "park.option",
+        "fields": {
+            "option_name": "주차장"
+        }
+    }
+]
