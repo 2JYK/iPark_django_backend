@@ -20,19 +20,25 @@ class Park(models.Model):
     p_img = models.CharField("이미지", max_length=300)
     longitude = models.CharField("X좌표", max_length=50)
     latitude = models.CharField("Y좌표", max_length=50)
+    check_count = models.PositiveIntegerField("조회수", default=0)
     created_at = models.DateField("공원 정보 생성시간", auto_now_add=True)
     updated_at = models.DateField("공원 정보 수정시간", auto_now=True)
 
     def __str__(self):
         return self.p_park
+    
+    @property
+    def update_counter(self):
+        self.check_count = self.check_count + 1
+        self.save()
 
 
 class ParkComment(models.Model):
     user = models.ForeignKey("user.User", verbose_name="작성자", on_delete=models.CASCADE)
     park = models.ForeignKey(Park, verbose_name="공원", on_delete=models.CASCADE)
-    comments = models.TextField("댓글")
+    comment = models.TextField("댓글")
     created_at = models.DateTimeField("공원 댓글 생성시간", auto_now_add=True)
     updated_at = models.DateTimeField("공원 댓글 수정시간", auto_now=True)
 
     def __str__(self):
-        return f'{self.user} -> {self.comments}'
+        return f'{self.user} -> {self.comment}'
