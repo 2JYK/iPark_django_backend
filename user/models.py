@@ -35,7 +35,7 @@ class User(AbstractBaseUser):
     username = models.CharField("사용자 계정", max_length=30, unique=True)
     password = models.CharField("비밀번호", max_length=128)
     fullname = models.CharField("사용자 이름", max_length=20)
-    email = models.EmailField("이메일", max_length=100)
+    email = models.EmailField("이메일", max_length=100, unique=True)
     phone = models.CharField("핸드폰 번호", max_length=20)
     birthday = models.DateField("생년월일", null=True)
     region = models.ForeignKey(Region, verbose_name="지역", on_delete=models.SET_NULL, null=True)
