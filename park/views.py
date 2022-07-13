@@ -24,7 +24,6 @@ class ParkCommentView(APIView):
     def post(self, request, park_id):
         if request.user.is_anonymous:
             return Response({"message": "로그인을 해주세요"}, status=status.HTTP_401_UNAUTHORIZED)
-        
 
         park = ParkModel.objects.get(id=park_id)
         
@@ -43,7 +42,7 @@ class ParkCommentView(APIView):
         return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 댓글 수정
-    def put(self, request, comment_id):
+    def put(self, request, park_id, comment_id):
         try: 
             comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)  
             
