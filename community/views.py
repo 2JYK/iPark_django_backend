@@ -6,7 +6,10 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from community.serializers import ArticleSerializer
+from community.serializers import ArticleCommentSerializer
+
 from community.models import Article as ArticleModel
+from community.models import ArticleComment as ArticleCommentModel
 
 
 class CommunityView(APIView):
