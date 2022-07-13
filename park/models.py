@@ -41,4 +41,4 @@ class ParkComment(models.Model):
     updated_at = models.DateTimeField("공원 댓글 수정시간", auto_now=True)
 
     def __str__(self):
-        return f'{self.user} -> {self.comment}'
+        return f"{self.user} -> {self.comment}"

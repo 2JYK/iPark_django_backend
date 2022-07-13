@@ -39,12 +39,12 @@ class ParkCommentView(APIView):
         return Response({"message" : "댓글 작성이 실패하였습니다"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 댓글 수정
-    def put(self, request, park_id, comment_id):
+    def put(self, request, comment_id):
         try: 
             comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)  
             
         except ParkCommentModel.DoesNotExist:
-            return Response({"message" : "존재하지 않거나 권한이 없는 댓글입니다"}, status=status.HTTP_400_BAD_REQUEST)        
+            return Response({"message" : "해당 댓글이 존재하지 않거나 권한이 없습니다"}, status=status.HTTP_400_BAD_REQUEST)        
                 
         if comment.comment == request.data["comment"]: 
             return Response({"message" : "수정할 내용을 입력해주세요"}, status=status.HTTP_409_CONFLICT)  
@@ -57,7 +57,7 @@ class ParkCommentView(APIView):
             return Response(comment_serializer.data, status=status.HTTP_200_OK)
 
     # 댓글 삭제
-    def delete(self, request, park_id, comment_id):
+    def delete(self, request, comment_id):
         try:
             comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)
             comment.delete()
@@ -65,4 +65,4 @@ class ParkCommentView(APIView):
             return Response({"message" : "해당 댓글이 삭제되었습니다"}, status=status.HTTP_200_OK)
         
         except ParkCommentModel.DoesNotExist:
-            return Response({"message" : "존재하지 않거나 권한이 없는 댓글입니다"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message" : "해당 댓글이 존재하지 않거나 권한이 없습니다"}, status=status.HTTP_400_BAD_REQUEST)
