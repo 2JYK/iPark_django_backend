@@ -36,9 +36,9 @@ class Park(models.Model):
 class ParkComment(models.Model):
     user = models.ForeignKey("user.User", verbose_name="작성자", on_delete=models.CASCADE)
     park = models.ForeignKey(Park, verbose_name="공원", on_delete=models.CASCADE)
-    comments = models.TextField("댓글")
+    comment = models.TextField("댓글")
     created_at = models.DateTimeField("공원 댓글 생성시간", auto_now_add=True)
     updated_at = models.DateTimeField("공원 댓글 수정시간", auto_now=True)
 
     def __str__(self):
-        return f'{self.user} -> {self.comments}'
+        return f"{self.user} -> {self.comment}"
