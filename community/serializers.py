@@ -17,7 +17,7 @@ class ArticleCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ArticleCommentModel
-        fields = ["id", "article", "user", "username", "comments", 
+        fields = ["id", "article", "user", "username", "comment", 
                   "created_at_time", "created_at", "updated_at"]
 
 

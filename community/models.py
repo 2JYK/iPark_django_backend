@@ -17,7 +17,7 @@ class Tag(models.Model):
 class Article(models.Model):
     user = models.ForeignKey("user.User", verbose_name="작성자", on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, verbose_name="태그", on_delete=models.CASCADE)
-    image = models.ImageField("이미지")
+    image = models.ImageField("이미지", blank=True)
     title = models.CharField("제목", max_length=100)
     content = models.TextField("내용")
     check_count = models.PositiveIntegerField("조회수", default=0)
@@ -41,4 +41,4 @@ class ArticleComment(models.Model):
     updated_at = models.DateTimeField("커뮤니티 댓글 수정시간", auto_now=True)
 
     def __str__(self):
-        return f"{self.user} -> {self.comment}"
+        return f"{self.user}님이 작성한 댓글 : {self.comment}"
