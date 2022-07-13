@@ -20,11 +20,17 @@ class Article(models.Model):
     image = models.ImageField("이미지")
     title = models.CharField("제목", max_length=100)
     content = models.TextField("내용")
+    check_count = models.PositiveIntegerField("조회수", default=0)
     created_at = models.DateTimeField("커뮤니티 등록 일자", auto_now_add=True)
     updated_at = models.DateTimeField("커뮤니티 수정 일자", auto_now=True)
 
     def __str__(self):
         return f'id [ {self.id} ] {self.user.username} 님이 작성한 Article'
+
+    @property
+    def update_counter(self):
+        self.check_count = self.check_count + 1
+        self.save()
 
 
 class ArticleComment(models.Model):
