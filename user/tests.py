@@ -10,9 +10,10 @@ from user.models import Region
 class UserRegistrationTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.region_data = {"region_name": "강남구", "region_name": "강동구", "region_name": "강북구"}
-        cls.region = Region.objects.create(**cls.region_data)
-        
+        cls.region = Region.objects.bulk_create([Region(region_name="강남구"),
+                                                 Region(region_name="강동구"),
+                                                 Region(region_name="강북구")])
+
     def test_registration(self):
         url = reverse("user_view")
         user_data = {
@@ -22,7 +23,7 @@ class UserRegistrationTest(APITestCase):
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
             "birthday" : "2022-07-13",
-            "region" : 1
+            "region" : 2
         }
         
         response = self.client.post(url, user_data)
@@ -45,5 +46,40 @@ class UserLoginTest(APITestCase):
         }
         
         response = self.client.post(url, user_data)
+        
+        self.assertEqual(response.status_code, 200)
+        
+        
+# 회원정보 수정 및 회원탈퇴 테스트
+class UserInfoModifyDeleteTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.region = Region.objects.bulk_create([Region(region_name="강남구"),
+                                                 Region(region_name="강동구"),
+                                                 Region(region_name="강북구")])
+        
+        cls.user = User.objects.create_user("user10", "101010")
+        cls.login_data = {"username": "user10", "password" : "101010"}
+        
+    def setUp(self):
+        self.access_token = self.client.post(reverse("token_obtain_pair"), self.login_data).data["access"]
+    
+    # 회원정보 수정 테스트
+    def test_modify_user_info(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "password" : "202020",
+            "fullname" : "user20",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "birthday" : "2022-07-13",
+            "region" : 3
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
         
         self.assertEqual(response.status_code, 200)
