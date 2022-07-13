@@ -56,7 +56,7 @@ class FindUserInfoView(APIView):
         phone_input = correct_phone.match(request.data["phone"])
         
         if email_input == None or phone_input == None:
-            return Response({"msg": "이메일 혹은 핸드폰 번호 양식이 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "이메일 혹은 핸드폰 번호 양식이 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
         
