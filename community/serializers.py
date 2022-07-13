@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from community.models import Article as ArticleModle
 from community.models import ArticleComment as ArticleCommentModel
 
@@ -35,3 +34,4 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = ArticleModle
         fields = ["id", "user", "tag", "username", "tag_name", "image", 
                   "title", "content", "check_count","created_at", "updated_at"]
+
