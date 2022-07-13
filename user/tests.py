@@ -2,17 +2,17 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from user.models import User
-from user.models import Region
+from user.models import User as UserModel
+from user.models import Region as RegionModel
 
 
 # 회원가입 테스트
 class UserRegistrationTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.region = Region.objects.bulk_create([Region(region_name="강남구"),
-                                                 Region(region_name="강동구"),
-                                                 Region(region_name="강북구")])
+        cls.region = RegionModel.objects.bulk_create([RegionModel(region_name="강남구"),
+                                                      RegionModel(region_name="강동구"),
+                                                      RegionModel(region_name="강북구")])
 
     def test_registration(self):
         url = reverse("user_view")
@@ -36,7 +36,7 @@ class UserLoginTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user_data = {"username" : "user10", "password" : "1010abc!"}
-        cls.user = User.objects.create_user("user10", "1010abc!")
+        cls.user = UserModel.objects.create_user("user10", "1010abc!")
         
     def test_login(self):
         url = reverse("token_obtain_pair")
@@ -54,11 +54,11 @@ class UserLoginTest(APITestCase):
 class UserInfoModifyDeleteTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.region = Region.objects.bulk_create([Region(region_name="강남구"),
-                                                 Region(region_name="강동구"),
-                                                 Region(region_name="강북구")])
+        cls.region = RegionModel.objects.bulk_create([RegionModel(region_name="강남구"),
+                                                      RegionModel(region_name="강동구"),
+                                                      RegionModel(region_name="강북구")])
         
-        cls.user = User.objects.create_user("user10", "1010abc!")
+        cls.user = UserModel.objects.create_user("user10", "1010abc!")
         cls.login_data = {"username": "user10", "password" : "1010abc!"}
         
     def setUp(self):
@@ -105,7 +105,7 @@ class SearchUsernameTest(APITestCase):
             "phone" : "010-1010-1010",
             "birthday" : "2022-07-13",
         }
-        cls.user = User.objects.create(**user_data)
+        cls.user = UserModel.objects.create(**user_data)
         
     def test_search_username(self):
         url = reverse("myid_view")
