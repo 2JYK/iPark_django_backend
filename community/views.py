@@ -24,14 +24,15 @@ class CommunityView(APIView):
             return Response(serialized_data, status=status.HTTP_200_OK)
             
     def post(self, request):
-        request.data["user"] = request.user.id
-        article_serializer = ArticleSerializer(data=request.data)
+        data = request.data.dict()
+        data["user"] = request.user.id
+        article_serializer = ArticleSerializer(data=data)
 
         if article_serializer.is_valid():
             article_serializer.save()
-            return Response(article_serializer, status=status.HTTP_200_OK)
+            return Response(article_serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(article_serializer, status=status.HTTP_400_BAD_REQUEST)
+            return Response(article_serializer.data, status=status.HTTP_400_BAD_REQUEST)
         
         
 class CommentView(APIView):
