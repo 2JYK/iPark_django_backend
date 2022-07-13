@@ -90,4 +90,6 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         response = self.client.delete(url, HTTP_AUTHORIZATION=f"Bearer {self.access_token}")
         
-        self.assertEqual(response["message"], "회원탈퇴 성공")
+        self.assertEqual(response.data["message"], "회원탈퇴 성공")
+        
+        
