@@ -18,7 +18,7 @@ class UserRegistrationTest(APITestCase):
         url = reverse("user_view")
         user_data = {
             "username" : "user10",
-            "password" : "101010",
+            "password" : "1010abc!",
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
@@ -35,14 +35,14 @@ class UserRegistrationTest(APITestCase):
 class UserLoginTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user_data = {"username" : "user10", "password" : "101010"}
-        cls.user = User.objects.create_user("user10", "101010")
+        cls.user_data = {"username" : "user10", "password" : "1010abc!"}
+        cls.user = User.objects.create_user("user10", "1010abc!")
         
     def test_login(self):
         url = reverse("token_obtain_pair")
         user_data = {
             "username" : "user10",
-            "password" : "101010"
+            "password" : "1010abc!"
         }
         
         response = self.client.post(url, user_data)
@@ -58,8 +58,8 @@ class UserInfoModifyDeleteTest(APITestCase):
                                                  Region(region_name="강동구"),
                                                  Region(region_name="강북구")])
         
-        cls.user = User.objects.create_user("user10", "101010")
-        cls.login_data = {"username": "user10", "password" : "101010"}
+        cls.user = User.objects.create_user("user10", "1010abc!")
+        cls.login_data = {"username": "user10", "password" : "1010abc!"}
         
     def setUp(self):
         self.access_token = self.client.post(reverse("token_obtain_pair"), self.login_data).data["access"]
@@ -68,7 +68,7 @@ class UserInfoModifyDeleteTest(APITestCase):
     def test_modify_user_info(self):
         url = reverse("user_view")
         data_for_change = {
-            "password" : "202020",
+            "password" : "2020abc!",
             "fullname" : "user20",
             "email" : "user20@gmail.com",
             "phone" : "010-1010-1010",
@@ -99,7 +99,7 @@ class SearchUsernameTest(APITestCase):
     def setUpTestData(cls):
         user_data = {
             "username" : "user10",
-            "password" : "101010",
+            "password" : "1010abc!",
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
