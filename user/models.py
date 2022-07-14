@@ -5,7 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
-            raise ValueError('사용자 계정을 만들어주세요')
+            raise ValueError("사용자 계정을 만들어주세요")
         user = self.model(
             username=username,
         )
@@ -44,7 +44,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=True)
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
