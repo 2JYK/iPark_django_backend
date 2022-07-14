@@ -1,12 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models.query_utils import Q
+from park import serializers
 
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
 
 from park.serializers import ParkDetailSerializer
 from park.serializers import ParkCommentSerializer
+from park.serializers import ParkSerializer
 
 
 class ParkView(APIView):
@@ -77,3 +80,21 @@ class ParkCommentView(APIView):
             
             except ParkCommentModel.DoesNotExist:
                 return Response({"message": "해당 댓글이 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)     
+            
+            
+# 검색 페이지
+class ParkSearchView(APIView):
+    def get(self, request):
+        options = request.query_params.getlist("option", "")
+
+        query = Q()  
+        for option in options:
+            query.add(Q(option__option_name=option), Q.OR)
+            
+        results = ParkModel.objects.filter(query)
+
+        if results.exists():
+            serializer = ParkSerializer(results, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
