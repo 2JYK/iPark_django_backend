@@ -86,7 +86,7 @@ class ParkCommentView(APIView):
             
             
 # 검색 페이지
-class ParkSearchView(APIView):
+class OptionView(APIView):
     def get(self, request):
         options = request.query_params.getlist("option", "")
         
