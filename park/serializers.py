@@ -25,7 +25,7 @@ class ParkDetailSerializer(serializers.ModelSerializer):
         model = ParkModel
         fields = ["park_name", "addr", "image", "list_content", "admintel",
                   "longitude", "latitude", "main_equip", "template_url", "updated_at",
-                  "comments"]
+                  "comments", "check_count"]
     
 
 class ParkSerializer(serializers.ModelSerializer):

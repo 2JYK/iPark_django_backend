@@ -16,6 +16,8 @@ class ParkView(APIView):
     # 공원 상세 정보 조회
     def get(self, request, park_id):
         park = ParkModel.objects.get(id=park_id)
+        park.check_count += 1
+        park.save()
         serialized_data = ParkDetailSerializer(park).data
         
         return Response(serialized_data, status=status.HTTP_200_OK)
