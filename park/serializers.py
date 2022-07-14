@@ -27,3 +27,10 @@ class ParkDetailSerializer(serializers.ModelSerializer):
                   "longitude", "latitude", "main_equip", "template_url", "updated_at",
                   "comments"]
     
+
+class ParkSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = ParkModel
+        fields = ["park_name", "addr", "image", "list_content", "admintel",
+                  "longitude", "latitude", "main_equip", "template_url", "updated_at", "option"]
