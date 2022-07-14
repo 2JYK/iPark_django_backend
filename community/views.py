@@ -22,13 +22,14 @@ class CommunityView(APIView):
             return Response(serialized_data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        data = request.data
+        data = request.data.dict()
         data["user"] = request.user.id
         article_serializer = ArticleSerializer(data=data)
         
         if article_serializer.is_valid():
             article_serializer.save()
-            return Response(article_serializer.data, status=status.HTTP_200_OK) 
+            return Response(article_serializer.data, status=status.HTTP_200_OK)
+        
         return Response({"mseeage": "게시글 작성 실패 !"}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -38,25 +39,26 @@ class CommunityDetailView(APIView):
         article = ArticleModel.objects.get(id=article_id)
         article.update_counter
         serialized_data = ArticleSerializer(article, many=True).data
+        
         return Response(serialized_data, status=status.HTTP_200_OK)  
-    
+
     def put(self, request, article_id):
         user = request.user.id
         article = ArticleModel.objects.get(id=article_id)
 
         if article.user.id == user:
             article_serializer = ArticleSerializer(article, data=request.data, partial=True)
-            
+
             if article_serializer.is_valid():
                 article_serializer.save()
                 return Response(article_serializer.data, status=status.HTTP_200_OK)
-        
+
         return Response({"message": "게시글 작성자가 아닙니다"}, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def delete(self, request, article_id):
         user = request.user.id
         article = ArticleModel.objects.get(id=article_id)
-        
+
         if article.user.id == user:
             article.delete()
             return Response({"message": "해당 게시글이 삭제 되었습니다."}, status=status.HTTP_200_OK)
