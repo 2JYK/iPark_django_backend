@@ -28,7 +28,8 @@ class CommunityView(APIView):
         
         if article_serializer.is_valid():
             article_serializer.save()
-            return Response(article_serializer.data, status=status.HTTP_200_OK) 
+            return Response(article_serializer.data, status=status.HTTP_200_OK)
+        
         return Response({"mseeage": "게시글 작성 실패 !"}, status=status.HTTP_400_BAD_REQUEST)
 
 
