@@ -80,11 +80,13 @@ class AlterPasswordView(APIView):
         if email_input == None:
             return Response({"message": "이메일 형식에 맞게 작성해주세요."})
         else:
-            user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
-            if user:
-                return Response({"message": "비밀번호 변경 페이지로 이동합니다."}, status=status.HTTP_200_OK)
-            
-            return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
+                if searched_username:
+                    return Response({"username" : searched_username}, status=status.HTTP_200_OK)
+                
+            except UserModel.DoesNotExist:
+                return Response({"message": "사용자가 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)
     
     # 비밀번호 변경
     def put(self, request):
