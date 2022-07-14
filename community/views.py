@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -38,6 +36,7 @@ class CommunityView(APIView):
 class CommunityDetailView(APIView):
     def get(self, request, article_id):
         article = ArticleModel.objects.get(id=article_id)
+        article.update_counter
         serialized_data = ArticleSerializer(article, many=True).data
         return Response(serialized_data, status=status.HTTP_200_OK)  
     
@@ -65,7 +64,7 @@ class CommunityDetailView(APIView):
         return Response({"message": "게시글 작성자가 아닙니다"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-#댓글        
+# 게시글 상세페이지 댓글
 class CommentView(APIView):
     def get(self, request, article_id):
         aritcle = ArticleCommentModel.objects.filter(article_id=article_id)
@@ -86,6 +85,8 @@ class CommentView(APIView):
         if article_serializer.is_valid():
             article_serializer.save()
             return Response({"message": "댓글작성 완료!"}, status=status.HTTP_200_OK)
+        
+        return Response({"댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, comment_id):
         comment = ArticleCommentModel.objects.get(id=comment_id)
