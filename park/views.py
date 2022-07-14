@@ -43,30 +43,37 @@ class ParkCommentView(APIView):
     
     # 댓글 수정
     def put(self, request, park_id, comment_id):
-        try: 
-            comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)  
-            
-        except ParkCommentModel.DoesNotExist:
-            return Response({"message": "해당 댓글이 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)      
-                
-        if comment.comment == request.data["comment"]: 
-            return Response({"message": "수정할 내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST) 
-              
-        comment_serializer = ParkCommentSerializer(comment, data=request.data, partial=True)
+        if request.user.is_anonymous:
+            return Response({"message": "로그인을 해주세요"}, status=status.HTTP_401_UNAUTHORIZED)
         
-        if comment_serializer.is_valid():
-            comment_serializer.save()
+        else:
+            try: 
+                comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)  
+                
+            except ParkCommentModel.DoesNotExist:
+                return Response({"message": "해당 댓글이 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)      
+                    
+            if comment.comment == request.data["comment"]: 
+                return Response({"message": "수정할 내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST) 
+                
+            comment_serializer = ParkCommentSerializer(comment, data=request.data, partial=True)
             
-            return Response(comment_serializer.data, status=status.HTTP_200_OK)
-        return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
+            if comment_serializer.is_valid():
+                comment_serializer.save()
+                return Response(comment_serializer.data, status=status.HTTP_200_OK)
+            
+            return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
 
     # 댓글 삭제
-    def delete(self, request, comment_id):
-        try:
-            comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)
-            comment.delete()
-            
-            return Response({"message": "해당 댓글이 삭제되었습니다"}, status=status.HTTP_200_OK)
+    def delete(self, request, park_id, comment_id):
+        if request.user.is_anonymous:
+            return Response({"message": "로그인을 해주세요"}, status=status.HTTP_401_UNAUTHORIZED)
         
-        except ParkCommentModel.DoesNotExist:
-            return Response({"message": "해당 댓글이 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)     
+        else:
+            try:
+                comment = ParkCommentModel.objects.get(id=comment_id, user=request.user)
+                comment.delete()
+                return Response({"message": "해당 댓글이 삭제되었습니다"}, status=status.HTTP_200_OK)
+            
+            except ParkCommentModel.DoesNotExist:
+                return Response({"message": "해당 댓글이 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)     
