@@ -100,3 +100,12 @@ class ParkSearchView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+    
+    
+# 공원 인기순 검색
+class ParkPopularityView(APIView):
+    def get(self, request):
+        popular_park = ParkModel.objects.filter(check_count__gte=1).order_by("-check_count")
+        popular_serializer = ParkSerializer(popular_park, many=True)
+        
+        return Response(popular_serializer.data)
