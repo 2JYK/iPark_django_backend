@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models.query_utils import Q
+from django.db.models import Count
 from park import serializers
 
 from park.models import Park as ParkModel
@@ -88,12 +89,12 @@ class ParkCommentView(APIView):
 class ParkSearchView(APIView):
     def get(self, request):
         options = request.query_params.getlist("option", "")
-
-        query = Q()  
-        for option in options:
-            query.add(Q(option__option_name=option), Q.OR)
-            
-        results = ParkModel.objects.filter(query)
+        
+        if len(options) == 1:
+            results = ParkModel.objects.filter(option__option_name__contains=request.query_params.get("option", "")).distinct()
+        else:
+            results = ParkModel.objects.filter(option__option_name__in=options).distinct()
+            print(results)
 
         if results.exists():
             serializer = ParkSerializer(results, many=True)
