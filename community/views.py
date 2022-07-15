@@ -75,8 +75,8 @@ class CommunityDetailView(APIView):
 # 게시글 상세페이지 댓글
 class CommentView(APIView):
     def get(self, request, article_id):
-        aritcle = ArticleCommentModel.objects.filter(article_id=article_id)
-        serialized_data = ArticleCommentSerializer(aritcle, many=True).data
+        article = ArticleCommentModel.objects.filter(article_id=article_id)
+        serialized_data = ArticleCommentSerializer(article, many=True).data
 
         return Response(serialized_data, status=status.HTTP_200_OK)
 
