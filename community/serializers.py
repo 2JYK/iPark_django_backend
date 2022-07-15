@@ -1,4 +1,3 @@
-from dataclasses import field
 from rest_framework import serializers
 from community.models import Article as ArticleModle
 from community.models import ArticleComment as ArticleCommentModel
@@ -17,21 +16,22 @@ class ArticleCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ArticleCommentModel
-        fields = ["id", "article", "user", "username", "comments", 
+        fields = ["id", "article", "user", "username", "comment", 
                   "created_at_time", "created_at", "updated_at"]
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
     tag_name = serializers.SerializerMethodField()
-    
+
     def get_username(self, obj):
         return obj.user.username
 
     def get_tag_name(self,obj):
         return obj.tag.tag_name
-
+    
     class Meta:
         model = ArticleModle
-        fields = ["id", "user", "tag", "username", "tag_name", "image", "title", "content",
-                  "check_count","created_at", "updated_at"]
+        fields = ["id", "user", "tag", "username", "tag_name", "image", 
+                  "title", "content", "check_count","created_at", "updated_at"]
+
