@@ -23,7 +23,13 @@ class ParkDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ParkModel
-        fields = ["p_park", "p_addr", "p_img", "p_list_content", "p_admintel",
+        fields = ["park_name", "addr", "image", "list_content", "admintel",
                   "longitude", "latitude", "main_equip", "template_url", "updated_at",
-                  "comments"]
+                  "comments", "check_count"]
     
+
+class ParkSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = ParkModel
+        fields = ["park_name","image", "option", "check_count"]

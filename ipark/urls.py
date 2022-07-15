@@ -8,4 +8,3 @@ urlpatterns = [
     path("user/", include("user.urls")),
     path("community/", include("community.urls")),
 ]
-
