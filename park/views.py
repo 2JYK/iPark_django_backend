@@ -109,4 +109,4 @@ class ParkPopularityView(APIView):
         popular_park = ParkModel.objects.filter(check_count__gte=1).order_by("-check_count")
         popular_serializer = ParkSerializer(popular_park, many=True)
         
-        return Response(popular_serializer.data)
+        return Response(popular_serializer.data, status=status.HTTP_200_OK)
