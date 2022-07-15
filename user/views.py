@@ -58,10 +58,13 @@ class FindUserInfoView(APIView):
         if email_input == None or phone_input == None:
             return Response({"message": "이메일 혹은 핸드폰 번호 양식이 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
-        
-        if searched_username:
-            return Response({"username" : searched_username}, status=status.HTTP_200_OK)
+            try:
+                searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
+                if searched_username:
+                    return Response({"username" : searched_username}, status=status.HTTP_200_OK)
+                
+            except UserModel.DoesNotExist:
+                return Response({"message": "사용자가 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)
         
 
 class AlterPasswordView(APIView):
@@ -80,11 +83,13 @@ class AlterPasswordView(APIView):
         if email_input == None:
             return Response({"message": "이메일 형식에 맞게 작성해주세요."})
         else:
-            user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
-            if user:
-                return Response({"message": "비밀번호 변경 페이지로 이동합니다."}, status=status.HTTP_200_OK)
+            try: 
+                user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
+                if user:
+                    return Response({"message": "비밀번호 변경 페이지로 이동합니다."}, status=status.HTTP_200_OK)
             
-            return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_400_BAD_REQUEST)
+            except UserModel.DoesNotExist:
+                return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
     
     # 비밀번호 변경
     def put(self, request):
@@ -93,19 +98,22 @@ class AlterPasswordView(APIView):
         2. 새롭게 세팅할 비밀번호와 중복 확인용 비밀번호를 받는다. 
         3. 이 두 비밀번호가 정규표현식을 통과하고 일치한다면, UserSerializer에 request.data를 보내 custom updator를 통해 비밀번호를 update해준다.
         """
+        
         correct_password = re.compile("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         
-        first_password_input = correct_password.match(request.data["new_password"])
-        second_password_input = correct_password.match(request.data["rewrite_password"])
-        
-        if first_password_input == None or second_password_input == None:
+        if request.data["new_password"] == "" or request.data["rewrite_password"] == "":
             return Response({"message": "비밀번호를 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            if first_password_input == second_password_input:
-                user = UserModel.objects.get(id=request.user.id)
-                serializer = UserSerializer(user, data=request.data, partial=True)
-                if serializer.is_valid():
-                    serializer.save()
+            if request.data["new_password"] == request.data["rewrite_password"]:
+                password_input = correct_password.match(request.data["new_password"])
+                
+                if password_input == None:
+                    return Response({"message": "비밀번호를 양식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
+                    user.set_password(request.data["new_password"])
+                    user.save()
+                
                     return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_200_OK)
             
             return Response({"message": "두 비밀번호가 일치하지 않습니다."})
