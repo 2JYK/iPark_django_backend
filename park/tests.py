@@ -59,8 +59,8 @@ class ParkCommentTest(APITestCase):
 class OptionTest(APITestCase):
     def setUp(self):
         self.option_obj = OptionModel.objects.bulk_create([OptionModel(option_name="조경"),
-                                                     OptionModel(option_name="운동"),
-                                                     OptionModel(option_name="놀이공원")])
+                                                           OptionModel(option_name="운동"),
+                                                           OptionModel(option_name="놀이공원")])
 
         park_data = {
             "park_name": "서울대공원",
