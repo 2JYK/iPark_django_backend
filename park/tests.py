@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from park.models import Park as ParkModel
+from park.models import Option as OptionModel
 from user.models import User as UserModel
 
 
@@ -54,7 +55,27 @@ class ParkCommentTest(APITestCase):
         self.assertEqual(response.status_code, 400)
 
     
-    
-    
-    
-      
+# 공원 검색 페이지 테스트
+class OptionTest(APITestCase):
+    def setUp(self):
+        self.option_obj = OptionModel.objects.bulk_create([OptionModel(option_name="조경"),
+                                                     OptionModel(option_name="운동"),
+                                                     OptionModel(option_name="놀이공원")])
+
+        park_data = {
+            "park_name": "서울대공원",
+            "image": "http://www.naver.com",
+            "check_count": "5"
+        }
+        
+        self.park = ParkModel.objects.create(**park_data)
+        for option in self.option_obj:
+            self.park.option.add(option)
+        self.park.save()
+        
+    def test_option_find(self):
+        url = reverse("park_search")
+        response = self.client.get(f'{url}?option=조경&option=운동&option=놀이공원')
+        
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+        
