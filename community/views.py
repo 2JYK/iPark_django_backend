@@ -12,15 +12,21 @@ from community.models import ArticleComment as ArticleCommentModel
 #게시글 전체 페이지
 class CommunityView(APIView):
     def get(self, request):
-        if request.id == 1:  
-            article = ArticleModel.objects.filter(tag=1).order_by("-created_at")
-            serialized_data = ArticleSerializer(article, many=True).data
-            return Response(serialized_data, status=status.HTTP_200_OK)
-        else:
-            article = ArticleModel.objects.filter(tag=2).order_by("-created_at")
+        id = int(request.GET["id"])
+        user = request.user.id
+
+        if id == 1 or id == 2:
+            article = ArticleModel.objects.filter(tag=id).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
 
+        if id == 3 and user:
+            article = ArticleModel.objects.filter(user=user).order_by("-created_at")
+            serialized_data = ArticleSerializer(article, many=True).data
+            return Response(serialized_data, status=status.HTTP_200_OK)
+        
+        return Response({"message": "접근 권한이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+            
     def post(self, request):
         data = request.data.dict()
         data["user"] = request.user.id
@@ -38,7 +44,7 @@ class CommunityDetailView(APIView):
     def get(self, request, article_id):
         article = ArticleModel.objects.get(id=article_id)
         article.update_counter
-        serialized_data = ArticleSerializer(article, many=True).data
+        serialized_data = ArticleSerializer(article).data
         
         return Response(serialized_data, status=status.HTTP_200_OK)  
 
