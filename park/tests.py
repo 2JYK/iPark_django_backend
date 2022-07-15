@@ -79,3 +79,24 @@ class OptionTest(APITestCase):
         
         self.assertEqual(response.data[0]["park_name"], "서울대공원")
         
+        
+# 인기순 공원 검색 테스트
+class ParkPopularityTest(APITestCase):
+    def setUp(self):
+        self.option_obj = OptionModel.objects.create(option_name="조경")
+
+        park_list = [{"park_name": "남산공원", "check_count": "8"}, 
+                     {"park_name": "서울대공원", "check_count": "4"},
+                     {"park_name": "보라매근린공원", "check_count": "10"},
+                     {"park_name": "길동생태공원", "check_count": "0"}]
+
+        for park_data in park_list:
+            self.park = ParkModel.objects.create(**park_data)
+            self.park.option.add(self.option_obj)
+            self.park.save()   
+    
+    def test_popularity_park(self):
+        url = reverse("park_popularity")
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
