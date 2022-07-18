@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from django.db.models import Q
 
 from community.serializers import ArticleSerializer
 from community.serializers import ArticleCommentSerializer
@@ -15,15 +16,21 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 class CommunityView(APIView):
     authentication_classes = [JWTAuthentication]
     def get(self, request):
-        id = int(request.GET["id"])
+        id = request.GET.get('id', None)
         user = request.user.id
 
-        if id == 1 or id == 2:
+        if id is None: 
+            article = ArticleModel.objects.all().order_by("-created_at")
+            serialized_data = ArticleSerializer(article, many=True).data
+            return Response(serialized_data, status=status.HTTP_200_OK)
+              
+        if int(id) == 1 or int(id) == 2:
             article = ArticleModel.objects.filter(tag=id).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
 
-        if id == 3 and user:
+        if int(id) == 3 and user:
+            print(user)
             article = ArticleModel.objects.filter(user=user).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
