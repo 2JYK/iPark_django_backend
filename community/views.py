@@ -39,7 +39,7 @@ class CommunityView(APIView):
             article_serializer.save()
             return Response(article_serializer.data, status=status.HTTP_200_OK)
 
-        return Response(article_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "게시글에 빈칸이 있습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 #게시글 상세 페이지
@@ -97,7 +97,7 @@ class CommentView(APIView):
             article_serializer.save()
             return Response({"message": "댓글작성 완료!"}, status=status.HTTP_200_OK)
         
-        return Response({"댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, comment_id):
         comment = ArticleCommentModel.objects.get(id=comment_id)
