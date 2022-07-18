@@ -14,10 +14,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 #게시글 전체 페이지
 class CommunityView(APIView):
-    authentication_classes = [JWTAuthentication]
     def get(self, request):
         id = request.GET.get('id', None)
-        user = request.user.id
 
         if id is None: 
             article = ArticleModel.objects.all().order_by("-created_at")
@@ -29,7 +27,8 @@ class CommunityView(APIView):
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
 
-        if int(id) == 3 and user:
+        if int(id) == 3:
+            user = request.user.id
             print(user)
             article = ArticleModel.objects.filter(user=user).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
