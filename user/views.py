@@ -7,6 +7,7 @@ from django.db.models import Q
 import re
 
 from user.serializers import UserSerializer
+from user.serializers import AccountUpdateSerializer
 
 from user.models import User as UserModel
 
@@ -28,7 +29,7 @@ class UserView(APIView):
     def put(self, request):
         user = UserModel.objects.get(id=request.user.id)
         
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = AccountUpdateSerializer(user, data=request.data, partial=True)
         
         if serializer.is_valid():
             serializer.save()
