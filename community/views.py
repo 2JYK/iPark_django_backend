@@ -48,6 +48,18 @@ class CommunityView(APIView):
         return Response({"message": "게시글에 빈칸이 있습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class CommunitySearchView(APIView):
+    def get(self, request):
+        keyword = request.GET["keyword"]
+        print(keyword)
+        article = ArticleModel.objects.filter(
+            Q(title__icontains=keyword) | Q(content__icontains=keyword)
+        )
+        print(article)
+        serialized_data = ArticleSerializer(article, many=True).data
+        return Response(serialized_data, status=status.HTTP_200_OK)
+
+
 #게시글 상세 페이지
 class CommunityDetailView(APIView):
     def get(self, request, article_id):
