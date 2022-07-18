@@ -63,7 +63,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
     
     
-class accountUpdateSerializer(serializers.ModelSerializer):
+class AccountUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = UserModel
