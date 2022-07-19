@@ -1,15 +1,14 @@
+from django.db.models import Q
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from django.db.models import Q
 
 from community.serializers import ArticleSerializer
 from community.serializers import ArticleCommentSerializer
 
 from community.models import Article as ArticleModel
 from community.models import ArticleComment as ArticleCommentModel
-
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 #게시글 전체 페이지
@@ -48,6 +47,7 @@ class CommunityView(APIView):
         return Response({"message": "게시글에 빈칸이 있습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# 게시글 검색
 class CommunitySearchView(APIView):
     def get(self, request):
         keyword = request.GET["keyword"]
