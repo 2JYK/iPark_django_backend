@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from django.db.models import Q
 
 from community.serializers import ArticleSerializer
 from community.serializers import ArticleCommentSerializer
@@ -8,35 +9,55 @@ from community.serializers import ArticleCommentSerializer
 from community.models import Article as ArticleModel
 from community.models import ArticleComment as ArticleCommentModel
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 #게시글 전체 페이지
 class CommunityView(APIView):
     def get(self, request):
-        id = int(request.GET["id"])
-        user = request.user.id
+        id = request.GET.get('id', None)
 
-        if id == 1 or id == 2:
+        if id is None: 
+            article = ArticleModel.objects.all().order_by("-created_at")
+            serialized_data = ArticleSerializer(article, many=True).data
+            return Response(serialized_data, status=status.HTTP_200_OK)
+              
+        if int(id) == 1 or int(id) == 2:
             article = ArticleModel.objects.filter(tag=id).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
 
-        if id == 3 and user:
+        if int(id) == 3:
+            user = request.user.id
+            print(user)
             article = ArticleModel.objects.filter(user=user).order_by("-created_at")
             serialized_data = ArticleSerializer(article, many=True).data
             return Response(serialized_data, status=status.HTTP_200_OK)
-        
+
         return Response({"message": "접근 권한이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
-            
+
     def post(self, request):
         data = request.data.dict()
         data["user"] = request.user.id
         article_serializer = ArticleSerializer(data=data)
-        
+
         if article_serializer.is_valid():
             article_serializer.save()
             return Response(article_serializer.data, status=status.HTTP_200_OK)
-        
-        return Response({"mseeage": "게시글 작성 실패 !"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({"message": "게시글에 빈칸이 있습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommunitySearchView(APIView):
+    def get(self, request):
+        keyword = request.GET["keyword"]
+        print(keyword)
+        article = ArticleModel.objects.filter(
+            Q(title__icontains=keyword) | Q(content__icontains=keyword)
+        )
+        print(article)
+        serialized_data = ArticleSerializer(article, many=True).data
+        return Response(serialized_data, status=status.HTTP_200_OK)
 
 
 #게시글 상세 페이지
@@ -94,7 +115,7 @@ class CommentView(APIView):
             article_serializer.save()
             return Response({"message": "댓글작성 완료!"}, status=status.HTTP_200_OK)
         
-        return Response({"댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, comment_id):
         comment = ArticleCommentModel.objects.get(id=comment_id)

@@ -9,7 +9,7 @@ TAG_CHOICES = [
 
 class Tag(models.Model):
     tag_name = models.CharField("태그", max_length=10, choices=TAG_CHOICES, default="community")
-    
+
     def __str__(self):
         return self.tag_name
 
