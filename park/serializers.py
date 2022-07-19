@@ -46,3 +46,10 @@ class BookMarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ["bookmarks"]
+        
+
+class ToggleParkListSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = ParkModel
+        fields = ["id", "park_name"]
