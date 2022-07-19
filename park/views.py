@@ -8,6 +8,7 @@ from park.models import ParkComment as ParkCommentModel
 from park.serializers import ParkDetailSerializer
 from park.serializers import ParkCommentSerializer
 from park.serializers import ParkSerializer
+from park.serializers import ToggleParkListSerializer
 
 
 class ParkView(APIView):
@@ -107,3 +108,12 @@ class ParkPopularityView(APIView):
         popular_serializer = ParkSerializer(popular_park, many=True)
         
         return Response(popular_serializer.data, status=status.HTTP_200_OK)
+    
+
+# 토글 공원 리스트
+class ToggleParkView(APIView):
+    def get(self, request):
+        toggle_parks = ParkModel.objects.all()
+        
+        toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
+        return Response(toggle_serializer.data, status=status.HTTP_200_OK)
