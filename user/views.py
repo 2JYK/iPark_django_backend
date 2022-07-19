@@ -1,11 +1,13 @@
 import re
 from rest_framework.views import APIView
+from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.db.models import Q
 
 from user.serializers import UserSerializer
+from user.serializers import AccountUpdateSerializer
 
 from user.models import User as UserModel
 
@@ -27,7 +29,7 @@ class UserView(APIView):
     def put(self, request):
         user = UserModel.objects.get(id=request.user.id)
         
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = AccountUpdateSerializer(user, data=request.data, partial=True)
         
         if serializer.is_valid():
             serializer.save()
@@ -122,3 +124,29 @@ class AlterPasswordView(APIView):
                     return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_200_OK)
             
             return Response({"message": "두 비밀번호가 일치하지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserVerifyView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    # 계정관리 페이지 접근 권한 확인
+    def post(self, request):
+        correct_password = re.compile(
+            "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
+        password_input = correct_password.match(request.data["password"])
+
+        if request.data["username"] == "" or request.data["password"] == "":
+            return Response({"message": "아이디 또는 비밀번호 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            if password_input == None:
+                return Response({"message": "비밀번호 형식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                user = authenticate(username=request.data["username"], password=request.data["password"])
+
+                if request.user == user:
+                    user = UserModel.objects.get(username=request.data["username"])
+                    user_data = UserSerializer(user)
+
+                    return Response(user_data.data, status=status.HTTP_200_OK)
+                else:
+                    return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
