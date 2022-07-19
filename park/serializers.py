@@ -13,9 +13,14 @@ class OptionSerializer(serializers.ModelSerializer):
     
 
 class ParkCommentSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField()
+    
+    def get_username(self, obj):
+        return obj.user.username
+    
     class Meta:
         model = ParkCommentModel
-        fields = ["user", "park", "comment"]
+        fields = ["username", "park", "comment", "updated_at"]
         
         
 class ParkDetailSerializer(serializers.ModelSerializer):

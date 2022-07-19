@@ -1,9 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models.query_utils import Q
-from django.db.models import Count
-from park import serializers
 
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
