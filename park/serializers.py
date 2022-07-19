@@ -3,6 +3,7 @@ from rest_framework import serializers
 from park.models import Option as OptionModel
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
+from user.models import User as UserModel
 
 
 class OptionSerializer(serializers.ModelSerializer):
@@ -38,3 +39,10 @@ class ParkSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParkModel
         fields = ["id", "park_name","image", "check_count"]
+
+        
+class BookMarkSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = UserModel
+        fields = ["bookmarks"]
