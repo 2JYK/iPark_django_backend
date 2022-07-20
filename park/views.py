@@ -1,9 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models.query_utils import Q
-from django.db.models import Count
-from park import serializers
 
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
@@ -11,6 +8,7 @@ from park.models import ParkComment as ParkCommentModel
 from park.serializers import ParkDetailSerializer
 from park.serializers import ParkCommentSerializer
 from park.serializers import ParkSerializer
+from park.serializers import ToggleParkListSerializer
 
 
 class ParkView(APIView):
@@ -110,3 +108,12 @@ class ParkPopularityView(APIView):
         popular_serializer = ParkSerializer(popular_park, many=True)
         
         return Response(popular_serializer.data, status=status.HTTP_200_OK)
+    
+
+# 토글 공원 리스트
+class ToggleParkView(APIView):
+    def get(self, request):
+        toggle_parks = ParkModel.objects.all()
+        
+        toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
+        return Response(toggle_serializer.data, status=status.HTTP_200_OK)
