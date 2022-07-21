@@ -22,7 +22,8 @@ class ParkCommentTest(APITestCase):
                                             latitude = "latitude",
                                             main_equip = "main_equip",
                                             template_url = "template_url",
-                                            updated_at = "updated_at"
+                                            updated_at = "updated_at",
+                                            check_count = 10
                                         )
         
     def setUp(self):
@@ -99,4 +100,28 @@ class ParkPopularityTest(APITestCase):
         url = reverse("park_popularity")
         response = self.client.get(url)
 
+        self.assertEqual(response.status_code, 200)
+        
+        
+# 토글 공원 리스트 테스트
+class ToggleParkListTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.park = ParkModel.objects.create(park_name = "강남공원",
+                                            addr = "서울특별시 강남구",
+                                            zone = "강남구",
+                                            image = "http://www.gangnampark.com/parkimg",
+                                            list_content = "강남구에 있는 공원이다.",
+                                            admintel = "02-333-4444",
+                                            longitude = "126.1232144",
+                                            latitude = "37.1111111",
+                                            main_equip = "운동기구 화장실 지하철역",
+                                            template_url = "http://www.gangnampark.com/",
+                                        )
+                
+    def test_get_toggle_list(self):
+        url = reverse("toggle_park")
+        response = self.client.get(url)
+        
+        self.assertEqual(response.data[0]["park_name"], "강남공원")
         self.assertEqual(response.status_code, 200)
