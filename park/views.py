@@ -102,7 +102,6 @@ class OptionView(APIView):
             results = ParkModel.objects.filter(option__option_name__contains=request.query_params.get("option", "")).distinct()
         else:
             results = ParkModel.objects.filter(option__option_name__in=options).distinct()
-            print(results)
 
         if results.exists():
             serializer = ParkSerializer(results, many=True)
