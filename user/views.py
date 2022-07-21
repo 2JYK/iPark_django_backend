@@ -1,6 +1,7 @@
 import re
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -118,8 +119,11 @@ class AlterPasswordView(APIView):
                     return Response({"message": "비밀번호를 양식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
-                    user.set_password(request.data["new_password"])
-                    user.save()
+                    if check_password(request.data["new_password"], user.password):
+                        return Response({"message": "현재 사용중인 비밀번호와 동일한 비밀번호는 입력할 수 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+                    else:
+                        user.set_password(request.data["new_password"])
+                        user.save()
                 
                     return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_200_OK)
             
