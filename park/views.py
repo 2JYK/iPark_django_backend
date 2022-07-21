@@ -52,7 +52,7 @@ class ParkCommentView(APIView):
             park.save()
             
             return Response(comment_serializer.data, status=status.HTTP_200_OK)
-        print(comment_serializer.errors)
+            
         return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 댓글 수정
