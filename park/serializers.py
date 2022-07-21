@@ -14,14 +14,14 @@ class OptionSerializer(serializers.ModelSerializer):
     
 
 class ParkCommentSerializer(serializers.ModelSerializer):
-    username = serializers.SerializerMethodField()
+    user = serializers.SerializerMethodField()
     
-    def get_username(self, obj):
+    def get_user(self, obj):
         return obj.user.username
     
     class Meta:
         model = ParkCommentModel
-        fields = ["username", "park", "comment", "updated_at"]
+        fields = ["user", "park", "comment", "updated_at"]
         
         
 class ParkDetailSerializer(serializers.ModelSerializer):
@@ -29,7 +29,7 @@ class ParkDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ParkModel
-        fields = ["park_name", "addr", "image", "list_content", "admintel",
+        fields = ["id", "park_name", "addr", "image", "list_content", "admintel",
                   "longitude", "latitude", "main_equip", "template_url", "updated_at",
                   "comments", "check_count"]
     
