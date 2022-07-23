@@ -9,7 +9,7 @@ class Option(models.Model):
 
 
 class Park(models.Model):
-    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options", through="parkOption")
+    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options", through="ParkOption")
     park_name = models.CharField("공원명", max_length=200)
     addr = models.CharField("공원주소", max_length=200)
     zone = models.CharField("지역", max_length=100)
