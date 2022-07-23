@@ -9,7 +9,7 @@ class Option(models.Model):
 
 
 class Park(models.Model):
-    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options")
+    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options", through="parkOption")
     park_name = models.CharField("공원명", max_length=200)
     addr = models.CharField("공원주소", max_length=200)
     zone = models.CharField("지역", max_length=100)
@@ -31,6 +31,14 @@ class Park(models.Model):
     def update_counter(self):
         self.check_count = self.check_count + 1
         self.save()
+
+
+class ParkOption(models.Model):
+    park = models.ForeignKey(Park, on_delete=models.CASCADE)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = "park_park_option"
 
 
 class ParkComment(models.Model):
