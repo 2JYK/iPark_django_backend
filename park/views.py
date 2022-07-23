@@ -96,13 +96,25 @@ class ParkCommentView(APIView):
 # 검색 페이지
 class OptionView(APIView):
     def get(self, request):
-        options = request.query_params.getlist("option", "")
+        param = request.query_params.getlist("param")
         
-        if len(options) == 1:
-            results = ParkModel.objects.filter(option__option_name__contains=request.query_params.get("option", "")).distinct()
-        else:
-            results = ParkModel.objects.filter(option__option_name__in=options).distinct()
+        option_list = []
+        zone_list = []
 
+        for p in param:
+            if p in ["조경", "운동", "놀이공원", "역사", "학습테마", "교양", "편익", "주차장"]:
+                option_list.append(p)
+            else:
+                zone_list.append(p)
+
+        if len(option_list) > 0:
+            results = ParkModel.objects.filter(option__option_name__in=option_list).distinct()
+        elif len(zone_list) > 0:
+            results = ParkModel.objects.filter(zone__in=zone_list).distinct()
+        elif len(option_list) > 0 and len(zone_list) > 0:
+            # results = ParkModel.objects.filter(Q(option__option_name__in=option_list) & Q(zone__in=zone_list)).distinct()
+            results = ParkModel.objects.filter(zone__in=zone_list).filter(option__option_name__in=option_list).distinct()
+            
         if results.exists():
             serializer = ParkSerializer(results, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
