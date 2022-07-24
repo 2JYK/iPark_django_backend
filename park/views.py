@@ -14,10 +14,21 @@ from park.serializers import ToggleParkListSerializer
 class ParkView(APIView):
     # 공원 상세 정보 조회
     def get(self, request, park_id):
+        park_comment_page = int(self.request.query_params.get('urlParkCommentPageNum'))
+
+        comment_list = ParkCommentModel.objects.filter(park_id=park_id).order_by("-created_at")[
+            10 * (park_comment_page -1) : 10 + 10 * (park_comment_page -1)
+        ]
+
+        comment_total_count = ParkCommentModel.objects.filter(park_id=park_id).order_by("-created_at").count()        
+
         park = ParkModel.objects.get(id=park_id)
         park.check_count += 1
         park.save()
+        
         serialized_data = ParkDetailSerializer(park).data
+        serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
+        serialized_data["comment_total_count"] = comment_total_count
         
         return Response(serialized_data, status=status.HTTP_200_OK)
     
