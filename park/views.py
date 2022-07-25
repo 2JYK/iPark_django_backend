@@ -144,7 +144,7 @@ class ParkPopularityView(APIView):
 # 토글 공원 리스트
 class ToggleParkView(APIView):
     def get(self, request):
-        toggle_parks = ParkModel.objects.all()
+        toggle_parks = ParkModel.objects.all().order_by("park_name")
         
         toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
         return Response(toggle_serializer.data, status=status.HTTP_200_OK)
