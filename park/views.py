@@ -14,8 +14,11 @@ from park.serializers import ToggleParkListSerializer
 class ParkView(APIView):
     # 공원 상세 정보 조회
     def get(self, request, park_id):
-        park_comment_page = int(self.request.query_params.get('urlParkCommentPageNum'))
-
+        try:
+            park_comment_page = int(self.request.query_params.get('urlParkCommentPageNum'))
+        except:
+            park_comment_page = 1
+            
         comment_list = ParkCommentModel.objects.filter(park_id=park_id).order_by("-created_at")[
             10 * (park_comment_page -1) : 10 + 10 * (park_comment_page -1)
         ]
