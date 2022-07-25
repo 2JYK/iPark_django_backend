@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import check_password
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 import re
 
@@ -154,3 +155,26 @@ class UserVerifyView(APIView):
                     return Response(user_data.data, status=status.HTTP_200_OK)
                 else:
                     return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
+
+
+class KakaoLoginView(APIView):
+    # 소셜로그인 : 카카오 계정을 통해 iPark 로그인, 회원가입 진행
+    def post(self, request):
+        access_token = request.data["access_token"]
+        email = request.data["email"]
+   
+        try:
+            user = UserModel.objects.get(email=email)
+
+            if user and (user.password == None):
+                return Response({"message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, status=status.HTTP_201_CREATED)
+                
+            elif user and (user.password != None):
+                refresh = RefreshToken.for_user(user)
+                return Response({"message" : "로그인 성공",
+                                 "refresh": str(refresh), 
+                                 "access": str(refresh.access_token)
+                                 }, status=status.HTTP_200_OK)
+        
+        except UserModel.DoesNotExist:
+            return Response({"message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, status=status.HTTP_201_CREATED)
