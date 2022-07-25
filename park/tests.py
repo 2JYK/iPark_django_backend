@@ -55,32 +55,49 @@ class ParkCommentTest(APITestCase):
             )
         self.assertEqual(response.status_code, 400)
 
-    
+
 # 공원 검색 페이지 테스트
 class OptionTest(APITestCase):
-    def setUp(self):
-        self.option_obj = OptionModel.objects.bulk_create([OptionModel(option_name="조경"),
+    @classmethod
+    def setUpTestData(cls):
+        cls.option_obj = OptionModel.objects.bulk_create([OptionModel(option_name="조경"),
                                                            OptionModel(option_name="운동"),
                                                            OptionModel(option_name="놀이공원")])
-
+        
         park_data = {
             "park_name": "서울대공원",
+            "zone": "과천시",
             "image": "http://www.naver.com",
             "check_count": "5"
         }
         
-        self.park = ParkModel.objects.create(**park_data)
-        for option in self.option_obj:
-            self.park.option.add(option)
-        self.park.save()
+        cls.park = ParkModel.objects.create(**park_data)
+        for option in cls.option_obj:
+            cls.park.option.add(option)
+        cls.park.save()
         
+    # 공원 옵션만 들어올 경우
     def test_option_find(self):
         url = reverse("park_search")
-        response = self.client.get(f'{url}?option=조경&option=운동&option=놀이공원')
+        response = self.client.get(f'{url}?param=1&param=2')
         
         self.assertEqual(response.data[0]["park_name"], "서울대공원")
+    
+    # 공원 지역만 들어올 경우
+    def test_zone_find(self):
+        url = reverse("park_search")
+        response = self.client.get(f'{url}?param=과천시')
         
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+    
+    # 공원 옵션과 지역 모두 들어올 경우
+    def test_option_and_zone_find(self):
+        url = reverse("park_search")
+        response = self.client.get(f'{url}?param=2&param=과천시')
         
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+
+
 # 인기순 공원 검색 테스트
 class ParkPopularityTest(APITestCase):
     def setUp(self):
