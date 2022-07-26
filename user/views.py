@@ -167,14 +167,19 @@ class KakaoLoginView(APIView):
             user = UserModel.objects.get(email=email)
 
             if user and (user.password == None):
-                return Response({"message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, status=status.HTTP_201_CREATED)
+                return Response({"res_code": 1, 
+                                 "message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, 
+                                status=status.HTTP_200_OK)
                 
             elif user and (user.password != None):
                 refresh = RefreshToken.for_user(user)
-                return Response({"message" : "로그인 성공",
+                return Response({"res_code": 2, 
+                                 "message" : "로그인 성공",
                                  "refresh": str(refresh), 
                                  "access": str(refresh.access_token)
                                  }, status=status.HTTP_200_OK)
         
         except UserModel.DoesNotExist:
-            return Response({"message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, status=status.HTTP_201_CREATED)
+            return Response({"res_code": 1, 
+                             "message": "iPark 서비스 이용을 위해 회원님의 정보가 필요합니다"}, 
+                            status=status.HTTP_200_OK)
