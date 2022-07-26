@@ -3,6 +3,7 @@ from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from community.serializers import ArticleSerializer
 from community.serializers import ArticleCommentSerializer
@@ -10,30 +11,44 @@ from community.serializers import ArticleCommentSerializer
 from community.models import Article as ArticleModel
 from community.models import ArticleComment as ArticleCommentModel
 
+from community.pagination import PaginationHandlerMixin, BasePagination
 
-#게시글 전체 페이지
-class CommunityView(APIView):
+
+# 게시글 전체 페이지
+#   pagination이 필요한 APIView 클래스에게 PaginationHandlerMixin을 인자로 줌
+class CommunityView(APIView, PaginationHandlerMixin):
+    authentication_classes = [JWTAuthentication]
+    pagination_class = BasePagination   # query_param 설정 : ?page_size=<int>
+
     def get(self, request):
-        id = request.GET.get('id', None)
+        id = request.GET.get('id', None)    # query_param 설정 : ?id=<int>
 
-        if id is None: 
+        if id is None:
             article = ArticleModel.objects.all().order_by("-created_at")
-            serialized_data = ArticleSerializer(article, many=True).data
-            return Response(serialized_data, status=status.HTTP_200_OK)
-              
+            page = self.paginate_queryset(article)  # page_size, page에 따른 pagination 처리된 결과값
+            # 페이징 처리된 결과를 serializer에 담아서 결과 값 가공
+            serializer = self.get_paginated_response(ArticleSerializer(page, many=True).data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         if int(id) == 1 or int(id) == 2:
             article = ArticleModel.objects.filter(tag=id).order_by("-created_at")
-            serialized_data = ArticleSerializer(article, many=True).data
-            return Response(serialized_data, status=status.HTTP_200_OK)
+            page = self.paginate_queryset(article)  # page_size, page에 따른 pagination 처리된 결과값
+            # 페이징 처리된 결과를 serializer에 담아서 결과 값 가공
+            serializer = self.get_paginated_response(ArticleSerializer(page, many=True).data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
         if int(id) == 3:
-            user = request.user.id
-            print(user)
+            user = request.user
+            if user.is_anonymous:
+                return Response({"message": "로그인이 필요한 페이지입니다."}, status=status.HTTP_401_UNAUTHORIZED)    
             article = ArticleModel.objects.filter(user=user).order_by("-created_at")
-            serialized_data = ArticleSerializer(article, many=True).data
-            return Response(serialized_data, status=status.HTTP_200_OK)
+            page = self.paginate_queryset(article)  # page_size, page에 따른 pagination 처리된 결과값
+            # 페이징 처리된 결과를 serializer에 담아서 결과 값 가공
+            serializer = self.get_paginated_response(ArticleSerializer(page, many=True).data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response({"message": "접근 권한이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
 
     def post(self, request):
         data = request.data.dict()
