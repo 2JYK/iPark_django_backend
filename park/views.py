@@ -1,9 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models.query_utils import Q
-from django.db.models import Count
-from park import serializers
 
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
@@ -11,6 +8,7 @@ from park.models import ParkComment as ParkCommentModel
 from park.serializers import ParkDetailSerializer
 from park.serializers import ParkCommentSerializer
 from park.serializers import ParkSerializer
+from park.serializers import ToggleParkListSerializer
 
 
 class ParkView(APIView):
@@ -26,6 +24,13 @@ class ParkView(APIView):
 
 # 공원 상세 페이지의 댓글창    
 class ParkCommentView(APIView):
+    # 댓글 조회
+    def get(self, request, park_id):
+        comment = ParkCommentModel.objects.filter(park_id=park_id)
+        serialized_data = ParkCommentSerializer(comment, many=True).data
+        
+        return Response(serialized_data, status=status.HTTP_200_OK)
+    
     # 댓글 작성
     def post(self, request, park_id):
         if request.user.is_anonymous:
@@ -34,7 +39,6 @@ class ParkCommentView(APIView):
         park = ParkModel.objects.get(id=park_id)
         
         data = {
-            "user" : request.user.id,
             "park" : park.id,
             "comment" : request.data["comment"]
         }
@@ -42,9 +46,13 @@ class ParkCommentView(APIView):
         comment_serializer = ParkCommentSerializer(data=data)
 
         if comment_serializer.is_valid():
-            comment_serializer.save()
+            comment_serializer.save(user=request.user)
+            
+            park.check_count -= 1
+            park.save()
+            
             return Response(comment_serializer.data, status=status.HTTP_200_OK)
-        
+            
         return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 댓글 수정
@@ -109,4 +117,13 @@ class ParkPopularityView(APIView):
         popular_park = ParkModel.objects.filter(check_count__gte=1).order_by("-check_count")
         popular_serializer = ParkSerializer(popular_park, many=True)
         
-        return Response(popular_serializer.data)
+        return Response(popular_serializer.data, status=status.HTTP_200_OK)
+    
+
+# 토글 공원 리스트
+class ToggleParkView(APIView):
+    def get(self, request):
+        toggle_parks = ParkModel.objects.all()
+        
+        toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
+        return Response(toggle_serializer.data, status=status.HTTP_200_OK)
