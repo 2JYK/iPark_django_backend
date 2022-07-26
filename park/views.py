@@ -14,10 +14,24 @@ from park.serializers import ToggleParkListSerializer
 class ParkView(APIView):
     # 공원 상세 정보 조회
     def get(self, request, park_id):
+        try:
+            park_comment_page = int(self.request.query_params.get('urlParkCommentPageNum'))
+        except:
+            park_comment_page = 1
+            
+        comment_list = ParkCommentModel.objects.filter(park_id=park_id).order_by("-created_at")[
+            10 * (park_comment_page -1) : 10 + 10 * (park_comment_page -1)
+        ]
+
+        comment_total_count = ParkCommentModel.objects.filter(park_id=park_id).order_by("-created_at").count()        
+
         park = ParkModel.objects.get(id=park_id)
         park.check_count += 1
         park.save()
+        
         serialized_data = ParkDetailSerializer(park).data
+        serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
+        serialized_data["comment_total_count"] = comment_total_count
         
         return Response(serialized_data, status=status.HTTP_200_OK)
     
@@ -56,7 +70,7 @@ class ParkCommentView(APIView):
         return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 댓글 수정
-    def put(self, request, park_id, comment_id):
+    def put(self, request, comment_id):
         if request.user.is_anonymous:
             return Response({"message": "로그인을 해주세요"}, status=status.HTTP_401_UNAUTHORIZED)
         
@@ -79,7 +93,7 @@ class ParkCommentView(APIView):
             return Response({"message": "내용을 입력해주세요"}, status=status.HTTP_400_BAD_REQUEST)
 
     # 댓글 삭제
-    def delete(self, request, park_id, comment_id):
+    def delete(self, request, comment_id):
         if request.user.is_anonymous:
             return Response({"message": "로그인을 해주세요"}, status=status.HTTP_401_UNAUTHORIZED)
         
@@ -96,14 +110,24 @@ class ParkCommentView(APIView):
 # 검색 페이지
 class OptionView(APIView):
     def get(self, request):
-        options = request.query_params.getlist("option", "")
-        
-        if len(options) == 1:
-            results = ParkModel.objects.filter(option__option_name__contains=request.query_params.get("option", "")).distinct()
-        else:
-            results = ParkModel.objects.filter(option__option_name__in=options).distinct()
-            print(results)
+        param = request.query_params.getlist("param")
 
+        option_list = []
+        zone_list = []
+
+        for p in param:
+            if p in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+                option_list.append(p)
+            else:
+                zone_list.append(p)
+
+        if len(option_list) > 0 and len(zone_list) > 0:
+            results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
+        elif len(option_list) > 0:
+            results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
+        elif len(zone_list) > 0:
+            results = ParkModel.objects.filter(zone__in=zone_list).distinct()
+        
         if results.exists():
             serializer = ParkSerializer(results, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -123,7 +147,7 @@ class ParkPopularityView(APIView):
 # 토글 공원 리스트
 class ToggleParkView(APIView):
     def get(self, request):
-        toggle_parks = ParkModel.objects.all()
+        toggle_parks = ParkModel.objects.all().order_by("park_name")
         
         toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
         return Response(toggle_serializer.data, status=status.HTTP_200_OK)
