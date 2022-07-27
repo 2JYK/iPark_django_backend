@@ -24,7 +24,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
     tag_name = serializers.SerializerMethodField()
     created_at_time = serializers.SerializerMethodField()
-
+    comment_count = serializers.SerializerMethodField()
+    
     def get_username(self, obj):
         return obj.user.username
 
@@ -35,7 +36,10 @@ class ArticleSerializer(serializers.ModelSerializer):
         created_at_time = obj.created_at.replace(microsecond=0).isoformat()
         return created_at_time
     
+    def get_comment_count(self, obj):
+        return obj.articlecomment_set.count() 
+    
     class Meta:
         model = ArticleModle
         fields = ["id", "user", "tag", "username", "tag_name", "image", 
-                  "title", "content", "check_count","created_at", "updated_at", "created_at_time"]
+                  "title", "content", "check_count", "comment_count", "created_at", "updated_at", "created_at_time"]
