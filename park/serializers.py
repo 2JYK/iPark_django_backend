@@ -1,4 +1,3 @@
-from imp import source_from_cache
 from rest_framework import serializers
 
 from park.models import Option as OptionModel
@@ -6,7 +5,6 @@ from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
 from park.models import BookMark as BookMarkModel
 from user.models import User as UserModel
-from user.serializers import UserSerializer
 
 
 class OptionSerializer(serializers.ModelSerializer):
