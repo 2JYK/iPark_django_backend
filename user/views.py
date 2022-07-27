@@ -23,9 +23,9 @@ class UserView(APIView):
         
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원정보 수정
     def put(self, request):
@@ -35,9 +35,9 @@ class UserView(APIView):
         
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원탈퇴
     def delete(self, request):
@@ -74,13 +74,6 @@ class FindUserInfoView(APIView):
 class AlterPasswordView(APIView):
     # 비밀번호를 변경할 자격이 있는지 확인
     def post(self, request):
-        """
-        1. 비밀번호를 변경할 사용자의 username, email을 입력받는다.
-        2. 해당 값을 통해 비밀번호를 변경할 user를 찾아준다. 
-        3. 만약 user가 존재한다면 user 정보를 비밀번호 수정 페이지에서도 알 수 있도록 넘겨준다.
-        4. user가 존재하지 않는다면 "존재하지 않는 사용자입니다." 라는 메세지를 반환한다.
-        """
-        
         correct_email = re.compile("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
         email_input = correct_email.match(request.data["email"])
         
@@ -102,12 +95,6 @@ class AlterPasswordView(APIView):
     
     # 비밀번호 변경
     def put(self, request):
-        """
-        1. 사용자의 정보를 그대로 가져온다. 
-        2. 새롭게 세팅할 비밀번호와 중복 확인용 비밀번호를 받는다. 
-        3. 이 두 비밀번호가 정규표현식을 통과하고 일치한다면, UserSerializer에 request.data를 보내 custom updator를 통해 비밀번호를 update해준다.
-        """
-        
         correct_password = re.compile("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         
         if request.data["new_password"] == "" or request.data["rewrite_password"] == "":
@@ -126,7 +113,7 @@ class AlterPasswordView(APIView):
                         user.set_password(request.data["new_password"])
                         user.save()
                 
-                    return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_200_OK)
+                    return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_201_CREATED)
             
             return Response({"message": "두 비밀번호가 일치하지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
