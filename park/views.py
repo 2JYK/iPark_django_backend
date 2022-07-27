@@ -49,12 +49,12 @@ class ParkView(APIView):
         print(existed_bookmark)
         if existed_bookmark:
             existed_bookmark.delete()
-            return Response({"message":"북마크가 취소 되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"북마크가 취소 되었습니다."}, status=status.HTTP_200_OK)
         
         elif bookmark_serializer.is_valid():
             bookmark_serializer.save()
         print(bookmark_serializer.errors)
-        return Response(bookmark_serializer.data, status=status.HTTP_200_OK)
+        return Response({"message":"북마크가 완료 되었습니다."}, status=status.HTTP_200_OK)
 
 
 # 공원 상세 페이지의 댓글창    
