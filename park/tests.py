@@ -60,22 +60,21 @@ class ParkCommentTest(APITestCase):
 class OptionTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.option_obj = OptionModel.objects.bulk_create([OptionModel(option_name="조경"),
-                                                           OptionModel(option_name="운동"),
-                                                           OptionModel(option_name="놀이공원")])
-        
         park_data = {
             "park_name": "서울대공원",
             "zone": "과천시",
             "image": "http://www.naver.com",
             "check_count": "5"
         }
-        
         cls.park = ParkModel.objects.create(**park_data)
-        for option in cls.option_obj:
-            cls.park.option.add(option)
-        cls.park.save()
         
+        option_list = ["조경", "놀이공원"]
+        for option in option_list:
+            cls.option_obj = OptionModel.objects.create(option_name=option)
+            cls.park.option.add(cls.option_obj)
+
+        cls.park.save()
+
     # 공원 옵션만 들어올 경우
     def test_option_find(self):
         url = reverse("park_search")
