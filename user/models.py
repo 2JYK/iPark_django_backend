@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+from park.models import BookMark
+
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
@@ -31,7 +33,7 @@ class Region(models.Model):
 
 
 class User(AbstractBaseUser):
-    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users")
+    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users", through=BookMark)
     username = models.CharField("사용자 계정", max_length=30, unique=True)
     password = models.CharField("비밀번호", max_length=128)
     fullname = models.CharField("사용자 이름", max_length=20)
