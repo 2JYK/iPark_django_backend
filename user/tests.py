@@ -28,7 +28,7 @@ class UserRegistrationTest(APITestCase):
         
         response = self.client.post(url, user_data)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         
 
 # 로그인 테스트
@@ -82,7 +82,7 @@ class UserInfoModifyDeleteTest(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
         )
         
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
     
     # 회원탈퇴 테스트
     def test_delete_user(self):
