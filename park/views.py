@@ -1,14 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models.query_utils import Q
 
 from park.models import Park as ParkModel
 from park.models import ParkComment as ParkCommentModel
+from park.models import BookMark as BookMarkModel
 
 from park.serializers import ParkDetailSerializer
 from park.serializers import ParkCommentSerializer
 from park.serializers import ParkSerializer
 from park.serializers import ToggleParkListSerializer
+from park.serializers import BookMarkSerializer
 
 
 class ParkView(APIView):
@@ -34,7 +37,24 @@ class ParkView(APIView):
         serialized_data["comment_total_count"] = comment_total_count
         
         return Response(serialized_data, status=status.HTTP_200_OK)
-    
+
+    def post(self, request, park_id):
+        request.data["user"] = request.user.id
+        request.data["park"] = park_id
+        bookmark_serializer = BookMarkSerializer(data=request.data)
+
+        existed_bookmark = BookMarkModel.objects.filter(
+            Q(user_id=request.user.id) & Q(park_id=park_id)
+            )
+        
+        if existed_bookmark:
+            existed_bookmark.delete()
+            return Response({"message":"북마크가 취소 되었습니다."}, status=status.HTTP_200_OK)
+        
+        elif bookmark_serializer.is_valid():
+            bookmark_serializer.save()
+        return Response({"message":"북마크가 완료 되었습니다."}, status=status.HTTP_200_OK)
+
 
 # 공원 상세 페이지의 댓글창    
 class ParkCommentView(APIView):
@@ -151,3 +171,17 @@ class ToggleParkView(APIView):
         
         toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
         return Response(toggle_serializer.data, status=status.HTTP_200_OK)
+
+
+# 즐겨찾기 페이지
+class BookMarkView(APIView):
+    def get(self, request):
+        user = request.user.id
+        bookmarks = BookMarkModel.objects.filter(user_id=user).order_by("id")
+        bookmark_list = []
+        for bookmark in bookmarks:
+            park = ParkModel.objects.get(id=bookmark.park_id)
+            dict = {"id":park.id,"name":park.park_name,"desc":park.list_content, "image":park.image}
+            bookmark_list.append(dict)
+        
+        return Response(bookmark_list, status=status.HTTP_200_OK)
