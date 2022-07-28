@@ -46,14 +46,13 @@ class ParkView(APIView):
         existed_bookmark = BookMarkModel.objects.filter(
             Q(user_id=request.user.id) & Q(park_id=park_id)
             )
-        print(existed_bookmark)
+        
         if existed_bookmark:
             existed_bookmark.delete()
             return Response({"message":"북마크가 취소 되었습니다."}, status=status.HTTP_200_OK)
         
         elif bookmark_serializer.is_valid():
             bookmark_serializer.save()
-        print(bookmark_serializer.errors)
         return Response({"message":"북마크가 완료 되었습니다."}, status=status.HTTP_200_OK)
 
 
@@ -178,14 +177,11 @@ class ToggleParkView(APIView):
 class BookMarkView(APIView):
     def get(self, request):
         user = request.user.id
-        print("여기")
         bookmarks = BookMarkModel.objects.filter(user_id=user).order_by("id")
-        print(bookmarks)
         bookmark_list = []
         for bookmark in bookmarks:
             park = ParkModel.objects.get(id=bookmark.park_id)
             dict = {"id":park.id,"name":park.park_name,"desc":park.list_content, "image":park.image}
             bookmark_list.append(dict)
-        print(bookmark_list)
         
         return Response(bookmark_list, status=status.HTTP_200_OK)
