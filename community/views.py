@@ -128,8 +128,8 @@ class CommentView(APIView):
         article_serializer = ArticleCommentSerializer(data=data)
         if article_serializer.is_valid():
             article_serializer.save()
-            return Response({"message": "댓글작성 완료!"}, status=status.HTTP_200_OK)
-        
+            return Response({"message": "댓글작성 완료!", "data": article_serializer.data}, status=status.HTTP_200_OK)
+
         return Response({"message": "댓글 작성 실패!"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, comment_id):
@@ -145,9 +145,9 @@ class CommentView(APIView):
     def delete(self, request, comment_id):
         user = request.user.id
         comment = ArticleCommentModel.objects.get(id=comment_id)
-
+        
         if comment.user.id == user:
             comment.delete()
             return Response({"message": "삭제완료!"}, status=status.HTTP_200_OK)
-        
+
         return Response({"message": "삭제할수 없는 댓글"}, status=status.HTTP_400_BAD_REQUEST)
