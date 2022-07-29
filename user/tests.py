@@ -158,5 +158,3 @@ class AlterPasswordTest(APITestCase):
         response = self.client.put(url, password_data)
         
         self.assertEqual(response.data["message"], "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요.")
-
-
