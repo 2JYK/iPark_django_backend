@@ -187,13 +187,13 @@ class BookMarkView(APIView):
             dict = {"id":park.id,"name":park.park_name,"desc":park.list_content, "image":park.image}
             bookmark_list.append(dict)
             
-        data = {"username":username, "bookmark_list":bookmark_list}
+        data = {"username": username, "bookmark_list": bookmark_list}
 
         return Response(data, status=status.HTTP_200_OK)
 
     def delete(self, request):
-        park_id =request.GET.get('id',None)
+        park_id = request.GET.get('id', None)
         bookmark = BookMarkModel.objects.get(park_id=park_id)
         bookmark.delete()
 
-        return Response({"message":"북마크가 삭제 되었습니다."}, status=status.HTTP_200_OK)
+        return Response({"message": "북마크가 삭제 되었습니다."}, status=status.HTTP_200_OK)
