@@ -53,6 +53,7 @@ class ParkView(APIView):
         
         elif bookmark_serializer.is_valid():
             bookmark_serializer.save()
+        
         return Response({"message":"북마크가 완료 되었습니다."}, status=status.HTTP_200_OK)
 
 
@@ -168,8 +169,8 @@ class ParkPopularityView(APIView):
 class ToggleParkView(APIView):
     def get(self, request):
         toggle_parks = ParkModel.objects.all().order_by("park_name")
-        
         toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
+
         return Response(toggle_serializer.data, status=status.HTTP_200_OK)
 
 
@@ -177,11 +178,22 @@ class ToggleParkView(APIView):
 class BookMarkView(APIView):
     def get(self, request):
         user = request.user.id
+        username = request.user.username
         bookmarks = BookMarkModel.objects.filter(user_id=user).order_by("id")
         bookmark_list = []
+
         for bookmark in bookmarks:
             park = ParkModel.objects.get(id=bookmark.park_id)
             dict = {"id":park.id,"name":park.park_name,"desc":park.list_content, "image":park.image}
             bookmark_list.append(dict)
-        
-        return Response(bookmark_list, status=status.HTTP_200_OK)
+            
+        data = {"username": username, "bookmark_list": bookmark_list}
+
+        return Response(data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        park_id = request.GET.get('id', None)
+        bookmark = BookMarkModel.objects.get(park_id=park_id)
+        bookmark.delete()
+
+        return Response({"message": "북마크가 삭제 되었습니다."}, status=status.HTTP_200_OK)
