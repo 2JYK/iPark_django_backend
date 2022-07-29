@@ -179,12 +179,12 @@ class BookMarkView(APIView):
     def get(self, request):
         user = request.user.id
         username = request.user.username
-        bookmarks = BookMarkModel.objects.filter(user_id=user).order_by("id")
+        bookmarks = BookMarkModel.objects.filter(user_id=user).order_by("-id")
         bookmark_list = []
 
         for bookmark in bookmarks:
             park = ParkModel.objects.get(id=bookmark.park_id)
-            dict = {"id":park.id,"name":park.park_name,"desc":park.list_content, "image":park.image}
+            dict = {"bookmark_id": bookmark.id, "park_id": park.id, "name": park.park_name, "desc": park.list_content, "image": park.image}
             bookmark_list.append(dict)
             
         data = {"username": username, "bookmark_list": bookmark_list}
@@ -192,8 +192,8 @@ class BookMarkView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
     def delete(self, request):
-        park_id = request.GET.get('id', None)
-        bookmark = BookMarkModel.objects.get(park_id=park_id)
+        bookmark_id = request.GET.get('id', None)
+        bookmark = BookMarkModel.objects.get(id=bookmark_id)
         bookmark.delete()
 
         return Response({"message": "북마크가 삭제 되었습니다."}, status=status.HTTP_200_OK)
