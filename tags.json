@@ -1,0 +1,14 @@
+[
+    {
+        "model": "community.tag",
+        "fields": {
+            "tag_name": "community"
+        }
+    },
+    {
+        "model": "community.tag",
+        "fields": {
+            "tag_name": "market"
+        }
+    }
+]

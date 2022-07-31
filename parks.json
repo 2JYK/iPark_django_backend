@@ -35,7 +35,7 @@
             "addr_dong": "길동",
             "admintel": "02-489-2770",
             "main_equip": "편익시설 : 탐방객안내소 야외전시대 관찰대 목재데크 조류관찰대 길동생태문화센터",
-            "template_url": "http://parks.seoul.go.kr/template/sub/giladdr_dong.do",
+            "template_url": "http://parks.seoul.go.kr/template/sub/gildong.do",
             "list_content": "길동생태공원은 생물의 서식처를 제공하고 종다양성을 증진시키며 자연생태계의 생물들을 관찰 체험할 수 있도록 하여 시민들에게 건강한 생태공간을 제공하고 환경의 중요성을 일깨워주기 위한 공간입니다.",
             "image": "https://cityfarmer.seoul.go.kr/fileManager/www/editorUpload/9999/1636012868386.jpg",
             "longitude": "127.1547791",
@@ -176,6 +176,7 @@
         "fields": {
             "park_name": "중마루공원",
             "addr": "서울특별시 영등포구 영등포로53길 14",
+            "addr": "서울특별시 영등포구 영등포동2가 222",
             "zone": "영등포구",
             "addr_dong": "영등포동2가",
             "admintel": "02-2670-3717",
@@ -201,7 +202,7 @@
             "zone": "성동구",
             "addr_dong": "응봉동",
             "admintel": "02-2293-7646",
-            "main_equip": "기반시설 : 잔디광장 <br>조경시설 : 파고라 <br>운동시설 : 테니스장 게이트볼장 배드민턴장 다목적경기장 등 <br>편익시설 : 음수대 화장실",
+            "main_equip": "기반시설 : 잔디광장 <br>조경시설 : 파고라 <br>운동시설 : 테니스장 게이트볼장 배드민턴장 다목적경기장 <br>편익시설 : 음수대 화장실",
             "template_url": "https://parks.seoul.go.kr/parks/detailView.do?pIdx=17",
             "list_content": "응봉은 산모양이 매처럼 보이기 때문에 붙여졌다고 하며 조선시대 왕들이 매사냥을 하여 붙여진 이름으로 옛날에는 하나의 줄기였으나 도시개발로 인해 응봉산, 대현산, 대현배수지공원, 금호산, 매봉산, 5개 지역으로 나뉘어져 있고 한강에 연접해 있어 한강을 조망할 수 있으며 경관이 수려하고 편익시설 체력단련시설이 설치되어 이용이 편리하다.",
             "image": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1894",
@@ -210,6 +211,27 @@
             "option": [
                 1,
                 2,
+                7
+            ],
+            "created_at": "2022-07-12",
+            "updated_at": "2022-07-12"
+        }
+    },
+    {
+        "model": "park.park",
+        "fields": {
+            "park_name": "매화근린공원",
+            "addr": "서울특별시 강서구 등촌동 630-14",
+            "zone": "강서구",
+            "admintel": "02-2600-4181",
+            "main_equip": "조경시설 : 상징조형물 사각파고라 <br>편익시설 : 음수전 팔각정자",
+            "template_url": "https://parks.seoul.go.kr/parks/detailView.do?pIdx=18",
+            "list_content": "‘공장 이적지 공원화 사업’의 일환으로 옛 성진 유리(주) 공장 터에 사업비 6억 원을 들여 조성한 뒤 1998년 6월 18일 문을 열었다. 가양택지개발지구와 가깝고 면적은 총 1980㎡로 녹지 1197㎡ 산책로 783㎡가 조성되어 있다. 주요 시설물로는 유리를 소재로 한 상징 조형물이 있으며 팔각정자와 사각 파고라(그늘막) 음수전 등의자 평의자 등이 있다.",
+            "image": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1895",
+            "longitude": "126.86115",
+            "latitude": "37.5575833",
+            "option": [
+                1,
                 7
             ],
             "created_at": "2022-07-12",
@@ -2869,7 +2891,7 @@
             "addr_dong": "둔촌동",
             "admintel": "02-3425-6454",
             "main_equip": "기반시설 : 전망데크 휴게데크 </br>조경시설 : 유리온실 </br>교양시설 : 관천대 </br>편익시설 : 그늘막 별자리조명 등 ",
-            "template_url": "https://www.gangaddr_dong.go.kr/web/culture/contents/gdc010_020_030",
+            "template_url": "https://www.gangdong.go.kr/web/culture/contents/gdc010_020_030",
             "list_content": "일자산은 서울시 강동구와 경기도 하남시를 경계로 하고 있는 자연이 잘 보존되어 있는 야산으로 길동생태공원 맞은편에 허브천문공원이 위치한다. 이곳은 안정적인 수돗물 공급을 위한 배수지가 있는 곳으로 웰빙시대를 맞이하여 주민들에게 쾌적한 공간을 제공하고자 상수도사업본부와 강동구가 협력하여 하늘과 땅을 잇는 천문과 햇빛이 풍부하고 바람이 잘 통하는 곳에서 잘 자라는 허브를 테마로 배수지 상단부에 조성한 공원이다. 허브원 약초원 암석원 등으로 구성된 허브천문공원은 한민족 고유의 전통사상인 삼재(天,地,人) 사상에서 공간개념을 도출하여 우주공간(자미원 태미원 천시원 별자리 은하수 등)을 공원에 투영하고 음양 보행 사상에 기초하여 시설물 및 수목 등을 배치한 것이 그 특징이다. ",
             "image": "http://parks.seoul.go.kr/file/info/view.do?fIdx=1917",
             "longitude": "127.1533951",
