@@ -75,12 +75,11 @@ class ParkOptionView(APIView):
 class CommunitySearchView(APIView):
     def get(self, request):
         keyword = request.GET["keyword"]
-        print(keyword)
         article = ArticleModel.objects.filter(
             Q(title__icontains=keyword) | Q(content__icontains=keyword)
         )
-        print(article)
         serialized_data = ArticleSerializer(article, many=True).data
+        
         return Response(serialized_data, status=status.HTTP_200_OK)
 
 
