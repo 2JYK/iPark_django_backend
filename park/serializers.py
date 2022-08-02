@@ -21,7 +21,7 @@ class ParkCommentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ParkCommentModel
-        fields = ["user", "park", "comment", "updated_at", "id"]
+        fields = ["user", "park", "comment", "updated_at", "id", "user_id"]
 
 
 class ParkSerializer(serializers.ModelSerializer):
