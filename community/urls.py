@@ -4,6 +4,7 @@ from community import views
 
 urlpatterns = [
     path("", views.CommunityView.as_view(), name="community_view"),
+    path("park_option/", views.ParkOptionView.as_view()),
     path("search/", views.CommunitySearchView.as_view()),
     path("<int:article_id>/", views.CommunityDetailView.as_view()),
     path("<int:article_id>/comment/", views.CommentView.as_view()),
