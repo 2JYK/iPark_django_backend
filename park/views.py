@@ -1,4 +1,6 @@
 from rest_framework.views import APIView
+from geopy import distance
+import pandas as pd
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models.query_utils import Q
@@ -12,6 +14,21 @@ from park.serializers import ParkCommentSerializer
 from park.serializers import ParkSerializer
 from park.serializers import ToggleParkListSerializer
 from park.serializers import BookMarkSerializer
+
+data = pd.read_csv("park_parking_lot_coord.csv")
+
+
+# 공원에서 가까운 거리에 있는 주차장 추천
+def calculate_distance(park_name):
+    park_data = data.loc[data.park_name == park_name]
+    
+    if len(park_data) >= 1:
+        park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
+        park_data = park_data.sort_values(by=park_data.columns[13])
+
+        return park_data.iloc[:, 6:10]
+    else:
+        return []
 
 
 class ParkView(APIView):
@@ -32,9 +49,23 @@ class ParkView(APIView):
         park.check_count += 1
         park.save()
         
+        parking_lots = calculate_distance(park.park_name)
+        parking_lot_list = []
+        try:
+            for i in parking_lots.index:
+                parking_lot_list.append({
+                    "parking_name": parking_lots["parking_name"][i],
+                    "addr": parking_lots["addr"][i],
+                    "tel": parking_lots["tel"][i],
+                    "operation_rule_nm": parking_lots["operation_rule_nm"][i]
+                })
+        except:
+            parking_lot_list = ""
+        
         serialized_data = ParkDetailSerializer(park).data
         serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
         serialized_data["comment_total_count"] = comment_total_count
+        serialized_data["parking"] = parking_lot_list
         
         return Response(serialized_data, status=status.HTTP_200_OK)
 
