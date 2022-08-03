@@ -24,9 +24,9 @@ def calculate_distance(park_name):
     
     if len(park_data) >= 1:
         park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
-        park_data = park_data.sort_values(by=park_data.columns[13])
+        park_data = park_data.sort_values(by=park_data.columns[15])
 
-        return park_data.iloc[:, 6:10]
+        return park_data.iloc[:, 6:16]
     else:
         return []
 
@@ -57,7 +57,8 @@ class ParkView(APIView):
                     "parking_name": parking_lots["parking_name"][i],
                     "addr": parking_lots["addr"][i],
                     "tel": parking_lots["tel"][i],
-                    "operation_rule_nm": parking_lots["operation_rule_nm"][i]
+                    "operation_rule_nm": parking_lots["operation_rule_nm"][i],
+                    "distance": parking_lots["distance"][i]
                 })
         except:
             parking_lot_list = ""
