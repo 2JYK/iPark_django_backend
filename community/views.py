@@ -7,9 +7,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from community.serializers import ArticleSerializer
 from community.serializers import ArticleCommentSerializer
+from park.serializers import ToggleParkListSerializer
 
 from community.models import Article as ArticleModel
 from community.models import ArticleComment as ArticleCommentModel
+from park.models import Park as ParkModel
 
 from community.pagination import PaginationHandlerMixin, BasePagination
 
@@ -49,7 +51,6 @@ class CommunityView(APIView, PaginationHandlerMixin):
 
         return Response({"message": "접근 권한이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
-
     def post(self, request):
         data = request.data.dict()
         data["user"] = request.user.id
@@ -62,16 +63,23 @@ class CommunityView(APIView, PaginationHandlerMixin):
         return Response({"message": "게시글에 빈칸이 있습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# park_name 데이터
+class ParkOptionView(APIView):
+    def get(self, request):
+        park = ParkModel.objects.all()
+        serialized_data = ToggleParkListSerializer(park, many=True).data
+        return Response(serialized_data, status=status.HTTP_200_OK)
+
+
 # 게시글 검색
 class CommunitySearchView(APIView):
     def get(self, request):
         keyword = request.GET["keyword"]
-        print(keyword)
         article = ArticleModel.objects.filter(
             Q(title__icontains=keyword) | Q(content__icontains=keyword)
         )
-        print(article)
         serialized_data = ArticleSerializer(article, many=True).data
+        
         return Response(serialized_data, status=status.HTTP_200_OK)
 
 
