@@ -24,9 +24,9 @@ def calculate_distance(park_name):
     
     if len(park_data) >= 1:
         park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
-        park_data = park_data.sort_values(by=park_data.columns[13])
+        park_data = park_data.sort_values(by=park_data.columns[15])
 
-        return park_data.iloc[:, 6:10]
+        return park_data.iloc[:, 6:16]
     else:
         return []
 
@@ -57,7 +57,8 @@ class ParkView(APIView):
                     "parking_name": parking_lots["parking_name"][i],
                     "addr": parking_lots["addr"][i],
                     "tel": parking_lots["tel"][i],
-                    "operation_rule_nm": parking_lots["operation_rule_nm"][i]
+                    "operation_rule_nm": parking_lots["operation_rule_nm"][i],
+                    "distance": parking_lots["distance"][i]
                 })
         except:
             parking_lot_list = ""
@@ -173,18 +174,21 @@ class OptionView(APIView):
             else:
                 zone_list.append(p)
 
-        if len(option_list) > 0 and len(zone_list) > 0:
-            results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
-        elif len(option_list) > 0:
-            results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
-        elif len(zone_list) > 0:
-            results = ParkModel.objects.filter(zone__in=zone_list).distinct()
-        
-        if results.exists():
-            serializer = ParkSerializer(results, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            if len(option_list) > 0 and len(zone_list) > 0:
+                results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
+            elif len(option_list) > 0:
+                results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
+            elif len(zone_list) > 0:
+                results = ParkModel.objects.filter(zone__in=zone_list).distinct()
+    
+            if not results.exists():
+                return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+            elif results.exists():
+                serializer = ParkSerializer(results, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)  
+        except:
+            return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
     
     
 # 공원 인기순 검색
