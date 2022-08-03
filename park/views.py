@@ -21,11 +21,15 @@ data = pd.read_csv("park_parking_lot_coord.csv")
 # 공원에서 가까운 거리에 있는 주차장 추천
 def calculate_distance(park_name):
     park_data = data.loc[data.park_name == park_name]
-    park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
     
-    park_data = park_data.sort_values(by=park_data.columns[13])
+    try:
+        if park_data:
+            park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
+            park_data = park_data.sort_values(by=park_data.columns[13])
 
-    return park_data.iloc[:, 6:10]
+            return park_data.iloc[:, 6:10]
+    except:
+        return 
 
 
 class ParkView(APIView):
@@ -46,16 +50,16 @@ class ParkView(APIView):
         park.check_count += 1
         park.save()
         
-        park_name = park.park_name
-        parking_lots = calculate_distance(park_name)
+        parking_lots = calculate_distance(park.park_name)
         parking_lot_list = []
-        for i in parking_lots.index:
-            parking_lot_list.append({
-                "parking_name": parking_lots["parking_name"][i],
-                "addr": parking_lots["addr"][i],
-                "tel": parking_lots["tel"][i],
-                "operation_rule_nm": parking_lots["operation_rule_nm"][i]
-            })
+        if parking_lots:
+            for i in parking_lots.index:
+                parking_lot_list.append({
+                    "parking_name": parking_lots["parking_name"][i],
+                    "addr": parking_lots["addr"][i],
+                    "tel": parking_lots["tel"][i],
+                    "operation_rule_nm": parking_lots["operation_rule_nm"][i]
+                })
         
         serialized_data = ParkDetailSerializer(park).data
         serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
