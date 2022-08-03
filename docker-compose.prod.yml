@@ -35,8 +35,8 @@ services:
     ports:
       - "5432:5432"
 
-    
+
 volumes:
   postgres_db:
   static_volume:
-  media_volume:
+  media_volume: 
