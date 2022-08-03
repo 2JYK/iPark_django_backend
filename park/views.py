@@ -174,18 +174,21 @@ class OptionView(APIView):
             else:
                 zone_list.append(p)
 
-        if len(option_list) > 0 and len(zone_list) > 0:
-            results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
-        elif len(option_list) > 0:
-            results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
-        elif len(zone_list) > 0:
-            results = ParkModel.objects.filter(zone__in=zone_list).distinct()
-        
-        if results.exists():
-            serializer = ParkSerializer(results, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            if len(option_list) > 0 and len(zone_list) > 0:
+                results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
+            elif len(option_list) > 0:
+                results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
+            elif len(zone_list) > 0:
+                results = ParkModel.objects.filter(zone__in=zone_list).distinct()
+    
+            if not results.exists():
+                return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+            elif results.exists():
+                serializer = ParkSerializer(results, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)  
+        except:
+            return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
     
     
 # 공원 인기순 검색
