@@ -22,14 +22,13 @@ data = pd.read_csv("park_parking_lot_coord.csv")
 def calculate_distance(park_name):
     park_data = data.loc[data.park_name == park_name]
     
-    try:
-        if park_data:
-            park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
-            park_data = park_data.sort_values(by=park_data.columns[13])
+    if len(park_data) >= 1:
+        park_data["distance"] = park_data.apply(lambda x: distance.distance(x["park_coord"].strip("()"), x["parking_lot_coord"].strip("()")).km, axis=1)
+        park_data = park_data.sort_values(by=park_data.columns[13])
 
-            return park_data.iloc[:, 6:10]
-    except:
-        return 
+        return park_data.iloc[:, 6:10]
+    else:
+        return []
 
 
 class ParkView(APIView):
@@ -52,7 +51,7 @@ class ParkView(APIView):
         
         parking_lots = calculate_distance(park.park_name)
         parking_lot_list = []
-        if parking_lots:
+        try:
             for i in parking_lots.index:
                 parking_lot_list.append({
                     "parking_name": parking_lots["parking_name"][i],
@@ -60,6 +59,8 @@ class ParkView(APIView):
                     "tel": parking_lots["tel"][i],
                     "operation_rule_nm": parking_lots["operation_rule_nm"][i]
                 })
+        except:
+            parking_lot_list = ""
         
         serialized_data = ParkDetailSerializer(park).data
         serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
