@@ -1,9 +1,10 @@
-FROM python:3.9.10-alpine
+FROM python:3.9.10-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN apk update
-RUN apk add build-base python3-dev py-pip jpeg-dev zlib-dev libpq-dev
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y ffmpeg libgl1-mesa-glx
 
 COPY requirements.txt /usr/src/app/
 
