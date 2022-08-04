@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(ilovepark.net www.ilovepark.net)
+domains=(ilovepark.net front.ilovepark.net)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="sugi.28.jan@gmail.com" # Adding a valid address is strongly recommended
