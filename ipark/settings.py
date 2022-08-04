@@ -133,10 +133,21 @@ REST_FRAMEWORK = {
 }
 
 # CORS 설정
-CORS_ALLOWED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = (
     "http://localhost:5500",
     "http://127.0.0.1:5500",
-]
+    "https://front.ilovepark.net",
+    "https://www.ilovepark.net",
+)
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://front.ilovepark.net",
+    "https://www.ilovepark.net",
+)
 
 CORS_ALLOW_METHODS = [
     "DELETE",
