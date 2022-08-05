@@ -183,7 +183,7 @@ class OptionView(APIView):
             elif len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).distinct()
             else:
-                results = ParkModel.objects.filter(park_name=name[0])
+                results = ParkModel.objects.filter(park_name__contains=name[0])
 
             if not results.exists():
                 return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
