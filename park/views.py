@@ -164,18 +164,17 @@ class ParkCommentView(APIView):
 class OptionView(APIView):
     def get(self, request):
         param = request.query_params.getlist("param")
-        
+
         option_list, zone_list, name = [], [], []
 
         for p in param:
             if p in ["1", "2", "3", "4", "5", "6", "7", "8"]:
                 option_list.append(p)
             else:
-                if "공원" in p or "ㄱㅇ" in p:
-                    name.append(p)
-                else:
+                if "구" == p[-1] or "시" == p[-1]:
                     zone_list.append(p)
-
+                else:
+                    name.append(p)
         try:
             if len(option_list) > 0 and len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
