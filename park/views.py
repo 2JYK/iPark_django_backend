@@ -165,15 +165,16 @@ class OptionView(APIView):
     def get(self, request):
         param = request.query_params.getlist("param")
 
-        option_list = []
-        zone_list = []
+        option_list, zone_list, name = [], [], []
 
         for p in param:
             if p in ["1", "2", "3", "4", "5", "6", "7", "8"]:
                 option_list.append(p)
             else:
-                zone_list.append(p)
-
+                if "구" == p[-1] or "시" == p[-1]:
+                    zone_list.append(p)
+                else:
+                    name.append(p)
         try:
             if len(option_list) > 0 and len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
@@ -181,7 +182,9 @@ class OptionView(APIView):
                 results = ParkModel.objects.filter(parkoption__option_id__in=option_list).distinct()
             elif len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).distinct()
-    
+            else:
+                results = ParkModel.objects.filter(park_name__contains=name[0])
+
             if not results.exists():
                 return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
             elif results.exists():
