@@ -25,7 +25,7 @@ class UserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원정보 수정
     def put(self, request):
