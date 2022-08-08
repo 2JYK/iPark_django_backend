@@ -22,7 +22,6 @@ class UserRegistrationTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
             "region" : 2
         }
         
@@ -72,7 +71,6 @@ class UserInfoModifyDeleteTest(APITestCase):
             "fullname" : "user20",
             "email" : "user20@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
             "region" : 3
         }
         
@@ -103,7 +101,6 @@ class SearchUsernameTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
         }
         cls.user = UserModel.objects.create(**user_data)
         
@@ -129,7 +126,6 @@ class AlterPasswordTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
         }
         cls.user = UserModel.objects.create(**user_data)
     

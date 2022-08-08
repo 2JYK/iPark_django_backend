@@ -41,7 +41,7 @@ class User(AbstractBaseUser):
     join_date = models.DateTimeField("가입일자", auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []

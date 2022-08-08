@@ -30,7 +30,6 @@ class Migration(migrations.Migration):
                 ('fullname', models.CharField(max_length=20, verbose_name='사용자 이름')),
                 ('email', models.EmailField(max_length=100, unique=True, verbose_name='이메일')),
                 ('phone', models.CharField(max_length=20, verbose_name='핸드폰 번호')),
-                ('birthday', models.DateField(null=True, verbose_name='생년월일')),
                 ('join_date', models.DateTimeField(auto_now_add=True, verbose_name='가입일자')),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_admin', models.BooleanField(default=True)),
