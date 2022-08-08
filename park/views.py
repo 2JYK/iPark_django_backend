@@ -67,7 +67,7 @@ class ParkView(APIView):
         serialized_data["comments"] = ParkCommentSerializer(comment_list, many=True, context={"request": request}).data
         serialized_data["comment_total_count"] = comment_total_count
         serialized_data["parking"] = parking_lot_list
-        
+
         return Response(serialized_data, status=status.HTTP_200_OK)
 
     def post(self, request, park_id):
@@ -205,12 +205,12 @@ class ParkPopularityView(APIView):
 
 # 토글 공원 리스트
 class ToggleParkView(APIView):
-    def get(self, request):
-        toggle_parks = ParkModel.objects.all().order_by("park_name")
+    def post(self, request):
+        toggle_parks = ParkModel.objects.filter(addr_dong=request.data["data"]).order_by("park_name")
         toggle_serializer = ToggleParkListSerializer(toggle_parks, many=True)
 
         return Response(toggle_serializer.data, status=status.HTTP_200_OK)
-
+    
 
 # 즐겨찾기 페이지
 class BookMarkView(APIView):
