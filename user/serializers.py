@@ -61,7 +61,7 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ["username", "password", "fullname", "email",
-                  "phone", "birthday", "region", "join_date"]
+                  "phone", "region", "join_date"]
 
         extra_kwargs = {
             "password": {"write_only": True},
