@@ -22,13 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
         password_input = correct_password.match(data.get("password", ""))
         
         if data.get("username"):
-            if not len(data.get("username", "")) >= 6:
-                raise serializers.ValidationError(
+            try:
+                if UserModel.objects.get(username=data.get("username")):
+                    raise serializers.ValidationError(
+                        detail={"error": "이미 존재하는 username입니다."}
+                    )
+            except:
+                if not len(data.get("username", "")) >= 6:
+                    raise serializers.ValidationError(
                     detail={"error": "username의 길이는 6자리 이상이어야 합니다."})
-                
-        if not data.get("email", "").endswith(EMAIL):
-            raise serializers.ValidationError(
-                detail={"error": "네이버, 구글, 카카오, 다음, 네이트, 아웃룩 이메일만 가입할 수 있습니다."})
         
         if password_input == None:
             raise serializers.ValidationError(
