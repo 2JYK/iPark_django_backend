@@ -5,13 +5,19 @@ from django.contrib.auth.hashers import check_password
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 
+from user.jwt_claim_serializer import iParkTokenObtainPairSerializer
 from user.serializers import UserSerializer
 from user.serializers import AccountUpdateSerializer
 
 from user.models import User as UserModel
+
+
+class iParkTokenObtainPairView(TokenObtainPairView):
+    serializer_class = iParkTokenObtainPairSerializer
 
 
 class UserView(APIView):
@@ -37,7 +43,7 @@ class UserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원탈퇴
     def delete(self, request):
@@ -123,6 +129,7 @@ class UserVerifyView(APIView):
 
     # 계정관리 페이지 접근 권한 확인
     def post(self, request):
+        print(request.user)
         correct_password = re.compile(
             "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         password_input = correct_password.match(request.data["password"])

@@ -25,16 +25,16 @@ class UserSerializer(serializers.ModelSerializer):
             try:
                 if UserModel.objects.get(username=data.get("username")):
                     raise serializers.ValidationError(
-                        detail={"error": "이미 존재하는 username입니다."}
+                        detail={"username": "이미 존재하는 username입니다."}
                     )
             except:
                 if not len(data.get("username", "")) >= 6:
                     raise serializers.ValidationError(
-                    detail={"error": "username의 길이는 6자리 이상이어야 합니다."})
+                    detail={"username": "username의 길이는 6자리 이상이어야 합니다."})
         
         if password_input == None:
             raise serializers.ValidationError(
-                detail={"error": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
+                detail={"password": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
         
         return data
         
@@ -70,23 +70,27 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
-        correct_phone = re.compile("(010)-\d{4}-\d{4}")
-
-        phone_input = correct_phone.match(data.get("phone", ""))
-
-        if data.get("username"):
-            if not len(data.get("username", "")) >= 6:
+        print("durl")
+        correct_password = re.compile("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
+        
+        if data.get("password"):
+            password_input = correct_password.match(data.get("password"))
+            
+            if password_input == None:
                 raise serializers.ValidationError(
-                    detail={"error": "username의 길이는 6자리 이상이어야 합니다."})
-
-        if not data.get("email", "").endswith(EMAIL):
-            raise serializers.ValidationError(
-                detail={"error": "네이버, 구글, 카카오, 다음, 네이트, 아웃룩 이메일만 가입할 수 있습니다."})
-
-        if phone_input == None:
-            raise serializers.ValidationError(
-                detail={"error": "전화번호는 010-0000-0000 형식으로 작성해주시기 바랍니다."})
-
+                detail={"password": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
+        
+        if data.get("username"):
+            try:
+                if UserModel.objects.get(username=data.get("username")):
+                    raise serializers.ValidationError(
+                        detail={"username": "이미 존재하는 username입니다."}
+                    )
+            except:
+                if not len(data.get("username", "")) >= 6:
+                    raise serializers.ValidationError(
+                    detail={"username": "username의 길이는 6자리 이상이어야 합니다."})
+                    
         return data
 
     def update(self, instance, validated_data):
