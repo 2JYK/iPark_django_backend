@@ -5,13 +5,19 @@ from django.contrib.auth.hashers import check_password
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 
+from user.jwt_claim_serializer import iParkTokenObtainPairSerializer
 from user.serializers import UserSerializer
 from user.serializers import AccountUpdateSerializer
 
 from user.models import User as UserModel
+
+
+class iParkTokenObtainPairView(TokenObtainPairView):
+    serializer_class = iParkTokenObtainPairSerializer
 
 
 class UserView(APIView):
@@ -25,7 +31,7 @@ class UserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원정보 수정
     def put(self, request):
@@ -37,7 +43,7 @@ class UserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response({"error": "입력하신 정보를 확인해주세요"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # 회원탈퇴
     def delete(self, request):
@@ -127,8 +133,8 @@ class UserVerifyView(APIView):
             "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         password_input = correct_password.match(request.data["password"])
 
-        if request.data["username"] == "" or request.data["password"] == "":
-            return Response({"message": "아이디 또는 비밀번호 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+        if request.data["password"] == "":
+            return Response({"message": "비밀번호 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password_input == None:
                 return Response({"message": "비밀번호 형식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
@@ -141,7 +147,7 @@ class UserVerifyView(APIView):
 
                     return Response(user_data.data, status=status.HTTP_200_OK)
                 else:
-                    return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
+                    return Response({"message": "비밀번호가 일치하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
 
 
 class KakaoLoginView(APIView):
