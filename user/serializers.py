@@ -25,16 +25,16 @@ class UserSerializer(serializers.ModelSerializer):
             try:
                 if UserModel.objects.get(username=data.get("username")):
                     raise serializers.ValidationError(
-                        detail={"error": "이미 존재하는 username입니다."}
+                        detail={"username": "이미 존재하는 username입니다."}
                     )
             except:
                 if not len(data.get("username", "")) >= 6:
                     raise serializers.ValidationError(
-                    detail={"error": "username의 길이는 6자리 이상이어야 합니다."})
+                    detail={"username": "username의 길이는 6자리 이상이어야 합니다."})
         
         if password_input == None:
             raise serializers.ValidationError(
-                detail={"error": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
+                detail={"password": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
         
         return data
         
@@ -70,17 +70,27 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
+        print("durl")
+        correct_password = re.compile("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
+        
+        if data.get("password"):
+            password_input = correct_password.match(data.get("password"))
+            
+            if password_input == None:
+                raise serializers.ValidationError(
+                detail={"password": "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다."})
+        
         if data.get("username"):
             try:
                 if UserModel.objects.get(username=data.get("username")):
                     raise serializers.ValidationError(
-                        detail={"error": "이미 존재하는 username입니다."}
+                        detail={"username": "이미 존재하는 username입니다."}
                     )
             except:
                 if not len(data.get("username", "")) >= 6:
                     raise serializers.ValidationError(
-                    detail={"error": "username의 길이는 6자리 이상이어야 합니다."})
-
+                    detail={"username": "username의 길이는 6자리 이상이어야 합니다."})
+                    
         return data
 
     def update(self, instance, validated_data):
