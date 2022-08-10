@@ -88,15 +88,14 @@ WSGI_APPLICATION = 'ipark.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ipark',
-        'USER': 'ipark_2JYK',
-        'PASSWORD': 'ipark_2JYK',
-        'HOST': 'ipark.c8pvjktckrlb.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': os.environ.get('SQL_ENGINE',"django.db.backends.sqlite3"),
+        'NAME': os.environ.get('SQL_DATABASE', BASE_DIR / "db.sqlite3"),
+        'USER': os.environ.get('SQL_USER', 'user'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
