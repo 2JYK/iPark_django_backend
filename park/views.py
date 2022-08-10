@@ -163,10 +163,13 @@ class ParkCommentView(APIView):
             
 # 검색 페이지
 class OptionView(APIView):
-    def get(self, request):
+    def get(self, request):        
         param = request.query_params.getlist("param")
+        
+        if not param:
+            return Response({})
 
-        option_list, zone_list, name = [], [], []
+        option_list, zone_list, name = [], [], ""
 
         for p in param:
             if p in ["1", "2", "3", "4", "5", "6", "7", "8"]:
@@ -175,7 +178,8 @@ class OptionView(APIView):
                 if "구" == p[-1] or "시" == p[-1]:
                     zone_list.append(p)
                 else:
-                    name.append(p)
+                    name += p
+                    
         try:
             if len(option_list) > 0 and len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).filter(parkoption__option_id__in=option_list).distinct()
@@ -184,7 +188,7 @@ class OptionView(APIView):
             elif len(zone_list) > 0:
                 results = ParkModel.objects.filter(zone__in=zone_list).distinct()
             else:
-                results = ParkModel.objects.filter(park_name__contains=name[0])
+                results = ParkModel.objects.filter(park_name__contains=name)
 
             if not results.exists():
                 return Response({"message": "공원을 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
