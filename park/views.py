@@ -29,6 +29,14 @@ def calculate_distance(park_name):
         return park_data.iloc[:, 6:16]
     else:
         return []
+        
+
+# 공원 상세 페이지 즐겨찾기 조회
+class ParkBookMarkView(APIView):
+    def get(self, request, park_id):
+        bookmarks = BookMarkModel.objects.filter(park_id=park_id)
+        serialized_data = BookMarkSerializer(bookmarks, many=True).data
+        return Response(serialized_data, status=status.HTTP_200_OK)
 
 
 class ParkView(APIView):
