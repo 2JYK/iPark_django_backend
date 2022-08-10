@@ -39,14 +39,12 @@ class BookMarkSerializer(serializers.ModelSerializer):
 
 
 class ParkDetailSerializer(serializers.ModelSerializer):
-    comments = ParkCommentSerializer(many=True, read_only=True, source="parkcomment_set")
-    bookmarks = BookMarkSerializer(many=True, read_only=True, source="bookmark_set")
 
     class Meta:
         model = ParkModel
         fields = ["id", "park_name", "addr", "image", "list_content", "admintel",
                   "longitude", "latitude", "main_equip", "template_url", "updated_at",
-                  "comments", "check_count", "bookmarks"]
+                  "check_count"]
     
 
 class ToggleParkListSerializer(serializers.ModelSerializer):
