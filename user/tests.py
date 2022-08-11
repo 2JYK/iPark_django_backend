@@ -97,7 +97,7 @@ class UserRegistrationTest(APITestCase):
         self.assertEqual(response_2.data["username"][0], "user의 사용자 계정은/는 이미 존재합니다.")
 
     # 비밀번호를 입력하지 않았을 때
-    def test_registration_no_username(self):
+    def test_registration_no_password(self):
         url = reverse("user_view")
         user_data = {
             "username" : "user10",
@@ -112,3 +112,20 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["password"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # 입력한 비밀번호의 양식이 틀렸을 때
+    def test_registration_wrong_password(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010a",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["password"][0], "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다.")
