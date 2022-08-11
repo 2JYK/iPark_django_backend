@@ -268,4 +268,23 @@ class UserRegistrationTest(APITestCase):
         response = self.client.post(url, user_data)
 
         self.assertEqual(response.status_code, 201)
+
+
+# 로그인 테스트
+class UserLoginTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user_data = {"username" : "user10", "password" : "1010abc!"}
+        cls.user = UserModel.objects.create_user("user10", "1010abc!")
+    
+    # 모든 정보를 기입한 경우
+    def test_login_all_data(self):
+        url = reverse("ipark_token")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!"
+        }
         
+        response = self.client.post(url, user_data)
+        
+        self.assertEqual(response.status_code, 200)
