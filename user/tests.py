@@ -236,3 +236,20 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["phone"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # 존재하지 않는 지역을 입력한 경우
+    def test_registration_wrong_region(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user1010",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 26
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["region"][0], '유효하지 않은 pk "26" - 객체가 존재하지 않습니다.')
