@@ -16,6 +16,7 @@ class UserRegistrationTest(APITestCase):
         
         cls.region.save()
 
+    # 정상적인 회원가입
     def test_registration_all_data(self):
         url = reverse("user_view")
         user_data = {
@@ -33,6 +34,7 @@ class UserRegistrationTest(APITestCase):
         self.assertEqual(response.data["username"], "user10")
         self.assertEqual(response.data["region"], 2)
         
+    # username이 없을 때
     def test_registration_no_username(self):
         url = reverse("user_view")
         user_data = {
@@ -48,5 +50,21 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # username의 자릿수가 모자랄 때
+    def test_registration_wrong_username(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.data["username"][0], "username의 길이는 6자리 이상이어야 합니다.")
         
     
