@@ -195,3 +195,54 @@ class OptionTest(APITestCase):
         self.assertEqual(response_2.data["message"], "공원을 찾을 수 없습니다.")
 
 
+# 인기순 공원 검색 테스트
+class ParkPopularityTest(APITestCase):
+    def create_park(self, park_data):        
+        self.park = ParkModel.objects.create(**park_data)
+
+        self.park.save()
+
+    @classmethod
+    def setUpTestData(cls):        
+        park_data_1 = {
+            "park_name": "서울대공원",
+            "zone": "과천시",
+            "image": "1",
+            "check_count": "5"
+        }
+        
+        park_data_2 = {
+            "park_name": "남산공원",
+            "zone": "중구",
+            "image": "2",
+            "check_count": "10"
+        }
+        
+        park_data_3 = {
+            "park_name": "간데메공원",
+            "zone": "동대문구",
+            "image": "3",
+            "check_count": "1"
+        }
+        
+        park_data_4 = {
+            "park_name": "효창공원",
+            "zone": "용산구",
+            "image": "4",
+            "check_count": "0"
+        }
+
+        cls.create_park(cls, park_data_1)
+        cls.create_park(cls, park_data_2)
+        cls.create_park(cls, park_data_3)
+        cls.create_park(cls, park_data_4)
+    
+    def test_popularity_park(self):
+        url = reverse("park_popularity")
+        response = self.client.get(url)
+
+        self.assertEqual(response.data[0]["park_name"], "남산공원")
+        self.assertEqual(response.data[1]["park_name"], "서울대공원")
+        self.assertEqual(response.data[2]["park_name"], "간데메공원")
+        
+        
