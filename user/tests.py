@@ -22,13 +22,12 @@ class UserRegistrationTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
             "region" : 2
         }
         
         response = self.client.post(url, user_data)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         
 
 # 로그인 테스트
@@ -72,7 +71,6 @@ class UserInfoModifyDeleteTest(APITestCase):
             "fullname" : "user20",
             "email" : "user20@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
             "region" : 3
         }
         
@@ -82,7 +80,7 @@ class UserInfoModifyDeleteTest(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
         )
         
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
     
     # 회원탈퇴 테스트
     def test_delete_user(self):
@@ -103,7 +101,6 @@ class SearchUsernameTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
         }
         cls.user = UserModel.objects.create(**user_data)
         
@@ -129,7 +126,6 @@ class AlterPasswordTest(APITestCase):
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010",
-            "birthday" : "2022-07-13",
         }
         cls.user = UserModel.objects.create(**user_data)
     
@@ -158,5 +154,3 @@ class AlterPasswordTest(APITestCase):
         response = self.client.put(url, password_data)
         
         self.assertEqual(response.data["message"], "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요.")
-
-

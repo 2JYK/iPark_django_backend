@@ -9,11 +9,12 @@ class Option(models.Model):
 
 
 class Park(models.Model):
-    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options")
+    option = models.ManyToManyField(Option, verbose_name="공원 옵션", related_name="options", through="ParkOption")
     park_name = models.CharField("공원명", max_length=200)
     addr = models.CharField("공원주소", max_length=200)
     zone = models.CharField("지역", max_length=100)
-    admintel = models.CharField("전화번호", max_length=20)
+    addr_dong = models.CharField("동", max_length=100)
+    admintel = models.CharField("전화번호", max_length=100)
     main_equip = models.TextField("주요시설", blank=True)
     template_url = models.URLField("바로가기", max_length=200, blank=True)
     list_content = models.TextField("공원개요")
@@ -38,6 +39,14 @@ class Park(models.Model):
         self.save()
 
 
+class ParkOption(models.Model):
+    park = models.ForeignKey(Park, on_delete=models.CASCADE)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = "park_park_option"
+
+
 class ParkComment(models.Model):
     user = models.ForeignKey("user.User", verbose_name="작성자", on_delete=models.CASCADE)
     park = models.ForeignKey(Park, verbose_name="공원", on_delete=models.CASCADE)
@@ -47,3 +56,11 @@ class ParkComment(models.Model):
 
     def __str__(self):
         return f"{self.user} -> {self.comment}"
+
+class BookMark(models.Model):
+    user = models.ForeignKey("user.User", on_delete=models.CASCADE)
+    park = models.ForeignKey(Park, on_delete=models.CASCADE)
+    
+
+    class Meta:
+        db_table = "park_bookmark"
