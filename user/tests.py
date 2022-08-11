@@ -95,3 +95,20 @@ class UserRegistrationTest(APITestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response_2.status_code, 400)
         self.assertEqual(response_2.data["username"][0], "user의 사용자 계정은/는 이미 존재합니다.")
+
+    # 비밀번호를 입력하지 않았을 때
+    def test_registration_no_username(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["password"][0], "이 필드는 blank일 수 없습니다.")
