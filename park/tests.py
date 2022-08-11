@@ -105,4 +105,29 @@ class OptionTest(APITestCase):
         cls.create_park(cls, park_data_2, option_list_2)
         cls.create_park(cls, park_data_3, option_list_3)
 
+    # 공원 옵션만 들어올 경우(성공)
+    def test_option_find(self):
+        url = reverse("park_search")
+        response = self.client.get(f"{url}?param=1&param=2&param=3")
+        response_2 = self.client.get(f"{url}?param=4&param=8")
+        response_3 = self.client.get(f"{url}?param=7")
+
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+        self.assertEqual(response.data[1]["park_name"], "남산공원")
+        self.assertEqual(response.data[2]["park_name"], "간데메공원")
+        self.assertEqual(response_2.data[0]["park_name"], "남산공원")
+        self.assertEqual(response_3.data[0]["park_name"], "남산공원")
+        self.assertEqual(response_3.data[1]["park_name"], "간데메공원")
+        
+    # 공원 옵션만 들어올 경우(실패)
+    def test_option_find_fail(self):
+        url = reverse("park_search")
+        # 전체 옵션 리스트에 아예 없는 옵션
+        response = self.client.get(f"{url}?param=9")
+        # 전체 옵션 리스트에는 있지만 공원들이 갖고 있지 않은 옵션
+        response_1 = self.client.get(f"{url}?param=6")
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response_1.data["message"], "공원을 찾을 수 없습니다.")
+    
     
