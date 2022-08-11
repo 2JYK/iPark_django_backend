@@ -301,3 +301,16 @@ class UserLoginTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
+    
+    # password를 기입하지 않은 경우
+    def test_login_no_password(self):
+        url = reverse("ipark_token")
+        user_data = {
+            "username" : "user1010",
+            "password" : ""
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["password"][0], "이 필드는 blank일 수 없습니다.")
