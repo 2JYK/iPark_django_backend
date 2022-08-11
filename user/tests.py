@@ -129,3 +129,20 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["password"][0], "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다.")
+        
+    # 이름을 입력하지 않았을 때
+    def test_registration_no_fullname(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["fullname"][0], "이 필드는 blank일 수 없습니다.")
