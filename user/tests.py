@@ -253,3 +253,19 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["region"][0], '유효하지 않은 pk "26" - 객체가 존재하지 않습니다.')
+        
+    # 지역을 입력하지 않은 경우 (없어도 문제가 되지는 않지만, 프론트에서는 강남구가 기본값으로 설정되어 있어 선택하지 않을 일은 없음)
+    def test_registration_no_region(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user1010",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010"
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 201)
+        
