@@ -174,4 +174,24 @@ class OptionTest(APITestCase):
         self.assertEqual(response_2.status_code, 404)
         self.assertEqual(response_3.data["message"], "공원을 찾을 수 없습니다.")
     
-    
+    # 공원 이름으로 검색(성공)    
+    def test_park_by_name(self):
+        url = reverse("park_search")
+        response = self.client.get(f"{url}?param=서")
+        response_2 = self.client.get(f"{url}?param=원")
+
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+        self.assertEqual(response_2.data[0]["park_name"], "서울대공원")
+        self.assertEqual(response_2.data[1]["park_name"], "남산공원")
+        self.assertEqual(response_2.data[2]["park_name"], "간데메공원")
+        
+    # 공원 이름으로 검색(실패)    
+    def test_park_by_name_fail(self):
+        url = reverse("park_search")
+        response = self.client.get(f"{url}?param=탑골공원")
+        response_2 = self.client.get(f"{url}?param=상도근린공원")
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response_2.data["message"], "공원을 찾을 수 없습니다.")
+
+
