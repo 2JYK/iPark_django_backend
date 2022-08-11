@@ -146,3 +146,20 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["fullname"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # 이메일을 입력하지 않았을 때
+    def test_registration_no_email(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user1010",
+            "email" : "",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["email"][0], "이 필드는 blank일 수 없습니다.")
