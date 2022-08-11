@@ -68,7 +68,7 @@ class UserRegistrationTest(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "username의 길이는 6자리 이상이어야 합니다.")
         
-    # 중복 username일 때의 회원가입 테스트
+    # 중복 username인 경우
     def test_registration_same_username(self):
         url = reverse("user_view")
         user_data = {
@@ -185,9 +185,37 @@ class UserRegistrationTest(APITestCase):
         }
         
         response = self.client.post(url, user_data)
-        response_2 = self.client.post(url, user_data)
+        response_2 = self.client.post(url, user_data_2)
         
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
         self.assertEqual(response_2.status_code, 400)
         self.assertEqual(response_2.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
+        
+    # 중복 이메일을 입력한 경우
+    def test_registration_same_email(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        user_data_2 = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user10@gmail.com",
+            "phone" : "010-2020-2020",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+        response_2 = self.client.post(url, user_data_2)
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response_2.status_code, 400)
+        self.assertEqual(response_2.data["email"][0], "user의 이메일은/는 이미 존재합니다.")
