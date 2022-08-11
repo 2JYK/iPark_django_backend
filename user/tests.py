@@ -163,3 +163,31 @@ class UserRegistrationTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["email"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # 입력한 이메일의 양식이 틀렸을 때
+    def test_registration_wrong_email(self):
+        url = reverse("user_view")
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        user_data_2 = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 2
+        }
+        
+        response = self.client.post(url, user_data)
+        response_2 = self.client.post(url, user_data)
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
+        self.assertEqual(response_2.status_code, 400)
+        self.assertEqual(response_2.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
