@@ -246,3 +246,61 @@ class ParkPopularityTest(APITestCase):
         self.assertEqual(response.data[2]["park_name"], "간데메공원")
         
         
+# 토글 공원 리스트 테스트
+class ToggleParkListTest(APITestCase):
+    def create_park(self, park_data):        
+        self.park = ParkModel.objects.create(**park_data)
+
+        self.park.save()
+
+    @classmethod
+    def setUpTestData(cls):        
+        park_data_1 = {
+            "park_name": "서울대공원",
+            "zone": "과천시",
+            "addr_dong": "ㄱ",
+            "image": "1",
+            "check_count": "5"
+        }
+        
+        park_data_2 = {
+            "park_name": "남산공원",
+            "zone": "중구",
+            "addr_dong": "ㅈ",
+            "image": "2",
+            "check_count": "10"
+        }
+        
+        park_data_3 = {
+            "park_name": "간데메공원",
+            "zone": "동대문구",
+            "addr_dong": "ㄷ",
+            "image": "3",
+            "check_count": "1"
+        }
+        
+        park_data_4 = {
+            "park_name": "효창공원",
+            "zone": "용산구",
+            "addr_dong": "ㅇ",
+            "image": "4",
+            "check_count": "0"
+        }
+
+        cls.create_park(cls, park_data_1)
+        cls.create_park(cls, park_data_2)
+        cls.create_park(cls, park_data_3)
+        cls.create_park(cls, park_data_4)
+                
+    def test_get_toggle_list(self):
+        url = reverse("toggle_park")
+        response = self.client.post(url,{"data": "ㄱ"})
+        response_2 = self.client.post(url,{"data": "ㅈ"})
+        response_3 = self.client.post(url,{"data": "ㄷ"})
+        response_4 = self.client.post(url,{"data": "ㅇ"})
+        
+        self.assertEqual(response.data[0]["park_name"], "서울대공원")
+        self.assertEqual(response_2.data[0]["park_name"], "남산공원")
+        self.assertEqual(response_3.data[0]["park_name"], "간데메공원")
+        self.assertEqual(response_4.data[0]["park_name"], "효창공원")
+        
