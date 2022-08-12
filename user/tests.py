@@ -699,3 +699,24 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
         self.assertEqual(response_2.status_code, 400)
         self.assertEqual(response_2.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
+        
+    # email이 중복될 때
+    def test_modify_same_email(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user30@gmail.com",
+            "phone" : "010-2020-2020",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["email"][0], "user의 이메일은/는 이미 존재합니다.")
