@@ -125,12 +125,15 @@ class UserVerifyView(APIView):
 
         if request.data["password"] == "":
             return Response({"message": "비밀번호 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+        # 프론트에 사용자의 username이 띄워져 있지만, 사용자가 변경을 할 경우를 대비
+        elif request.data["username"] == "":
+            return Response({"message": "아이디를 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password_input == None:
                 return Response({"message": "비밀번호 형식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 user = authenticate(username=request.data["username"], password=request.data["password"])
-
+                
                 if request.user == user:
                     user = UserModel.objects.get(username=request.data["username"])
                     user_data = UserSerializer(user)
