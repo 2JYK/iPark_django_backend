@@ -420,7 +420,7 @@ class UserInfoModifyDeleteTest(APITestCase):
     def test_modify_wrong_username(self):
         url = reverse("user_view")
         data_for_change = {
-            "username" : "",
+            "username" : "user",
             "password" : "2020abc!",
             "fullname" : "user20",
             "email" : "user20@gmail.com",
@@ -433,9 +433,9 @@ class UserInfoModifyDeleteTest(APITestCase):
             data=data_for_change,
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
         )
-        
+
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
+        self.assertEqual(response.data["username"][0], "username의 길이는 6자리 이상이어야 합니다.")
         
     # username이 중복될 때
     def test_modify_same_username(self):
