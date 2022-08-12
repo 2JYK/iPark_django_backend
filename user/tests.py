@@ -348,4 +348,24 @@ class UserInfoModifyDeleteTest(APITestCase):
  
         cls.access_token = cls.client.post(reverse("ipark_token"), cls.login_data).data["access"]
         
+    # 회원정보 수정 테스트(모든 데이터 수정)
+    def test_modify_all_user_info(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 201)
+    
     
