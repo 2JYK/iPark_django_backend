@@ -850,3 +850,16 @@ class SearchUsernameTest(APITestCase):
         self.assertEqual(response.data["message"], "사용자가 존재하지 않습니다")
         self.assertEqual(response_2.status_code, 404)
         self.assertEqual(response_2.data["message"], "사용자가 존재하지 않습니다")
+        
+    # 핸드폰 번호를 입력하지 않은 경우
+    def test_search_username_no_phone(self):
+        url = reverse("myid_view")
+        data = {
+            "email" : "user10@gmail.com",
+            "phone" : ""
+        }
+        
+        response = self.client.post(url, data)
+        
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data["message"], "사용자가 존재하지 않습니다")
