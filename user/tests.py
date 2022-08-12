@@ -1,5 +1,6 @@
+from django.contrib.auth.hashers import make_password
 from django.urls import reverse
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 
 from user.models import User as UserModel
@@ -314,3 +315,37 @@ class UserLoginTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["password"][0], "이 필드는 blank일 수 없습니다.")
+        
+        
+# 회원정보 수정 및 회원탈퇴 테스트
+class UserInfoModifyDeleteTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        region_data = ["강남구", "강서구", "강북구", "은평구", "동작구", "중구"]
+        for region in region_data:
+            cls.region = RegionModel.objects.create(region_name=region)
+        
+        cls.region.save()
+        
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010"
+        }
+        
+        cls.user = UserModel.objects.create(
+            username="user10",
+            password=make_password("1010abc!"),
+            fullname="user10",
+            email="user10@gmail.com",
+            phone="010-1010-1010",
+            region=RegionModel.objects.get(id=3))
+
+        cls.client = APIClient()
+        cls.login_data = {"username": "user10", "password" : "1010abc!"}
+ 
+        cls.access_token = cls.client.post(reverse("ipark_token"), cls.login_data).data["access"]
+        
+    
