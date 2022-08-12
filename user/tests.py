@@ -871,12 +871,13 @@ class AlterPasswordTest(APITestCase):
     def setUpTestData(cls):
         user_data = {
             "username" : "user10",
-            "password" : "1010abc!",
             "fullname" : "user10",
             "email" : "user10@gmail.com",
             "phone" : "010-1010-1010"
         }
         cls.user = UserModel.objects.create(**user_data)
+        cls.user.set_password("1010abc!")
+        cls.user.save()
     
     # 비밀번호를 변경할 자격이 있는지 확인
     def test_post_user_info(self):
@@ -993,3 +994,17 @@ class AlterPasswordTest(APITestCase):
         self.assertEqual(response.data["message"], "두 비밀번호가 일치하지 않습니다.")
         self.assertEqual(response_2.data["message"], "비밀번호를 제대로 입력해주세요.")
         self.assertEqual(response_3.data["message"], "비밀번호를 제대로 입력해주세요.")
+        
+    # 이전과 동일한 비밀번호를 입력한 경우    
+    def test_alter_same_password(self):
+        url = reverse("alter_password_view")
+        password_data = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "1010abc!",
+            "rewrite_password" : "1010abc!"
+        }
+        
+        response = self.client.put(url, password_data)
+
+        self.assertEqual(response.data["message"], "현재 사용중인 비밀번호와 동일한 비밀번호는 입력할 수 없습니다.")
