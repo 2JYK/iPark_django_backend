@@ -642,3 +642,24 @@ class UserInfoModifyDeleteTest(APITestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data["email"], "user20@gmail.com")
+        
+    # email이 없을 때
+    def test_modify_no_email(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["email"][0], "이 필드는 blank일 수 없습니다.")
