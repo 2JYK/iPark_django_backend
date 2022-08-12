@@ -663,3 +663,39 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["email"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # email의 양식이 틀렸을 때
+    def test_modify_wrong_email(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user20gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        data_for_change_2 = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user20gmail.",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        response_2 = self.client.put(
+            path=url, 
+            data=data_for_change_2,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
+        self.assertEqual(response_2.status_code, 400)
+        self.assertEqual(response_2.data["email"][0], "유효한 이메일 주소를 입력하십시오.")
