@@ -1022,3 +1022,39 @@ class AlterPasswordTest(APITestCase):
         response = self.client.put(url, password_data)
 
         self.assertEqual(response.data["message"], "현재 사용중인 비밀번호와 동일한 비밀번호는 입력할 수 없습니다.")
+        
+
+# 계정관리 페이지 접근 권한 확인 테스트
+class UserVerifyTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):        
+        cls.user = UserModel.objects.create(
+            username="user10",
+            password=make_password("1010abc!"),
+            fullname="user10",
+            email="user10@gmail.com",
+            phone="010-1010-1010"
+        )
+        
+        cls.client = APIClient()
+        cls.login_data = {"username": "user10", "password" : "1010abc!"}
+ 
+        cls.access_token = cls.client.post(reverse("ipark_token"), cls.login_data).data["access"]
+    
+    # 계정관리 페이지 접근을 할 수 있는 경우
+    def test_user_verify(self):
+        url = reverse("user_verification_view")
+        data = {
+            "username" : "user10",
+            "password" : "1010abc!"
+        }
+        
+        response = self.client.post(
+            path=url, 
+            data=data,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["email"], "user10@gmail.com")
+        self.assertEqual(response.data["phone"], "010-1010-1010")
