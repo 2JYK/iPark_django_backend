@@ -863,3 +863,44 @@ class SearchUsernameTest(APITestCase):
         
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.data["message"], "사용자가 존재하지 않습니다")
+        
+
+# 비밀번호 변경 테스트
+class AlterPasswordTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010"
+        }
+        cls.user = UserModel.objects.create(**user_data)
+    
+    # 비밀번호를 변경할 자격이 있는지 확인
+    def test_post_user_info(self):
+        url = reverse("alter_password_view")
+        user_data = {
+            "username" : "user10",
+            "email" : "user10@gmail.com"
+        }
+        
+        response = self.client.post(url, user_data)
+        
+        self.assertEqual(response.data["username"], "user10")
+        
+    # 비밀번호를 변경할 자격이 없는 사람일 경우
+    def test_post_wrong_user_info(self):
+        url = reverse("alter_password_view")
+        user_data = {
+            "username" : "user30",
+            "email" : "user30@gmail.com"
+        }
+        
+        response = self.client.post(url, user_data)
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data["message"], "존재하지 않는 사용자입니다.")
+    
+    
