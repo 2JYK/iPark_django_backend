@@ -327,20 +327,20 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         cls.region.save()
         
-        user_data = {
-            "username" : "user10",
-            "password" : "1010abc!",
-            "fullname" : "user10",
-            "email" : "user10@gmail.com",
-            "phone" : "010-1010-1010"
-        }
-        
         cls.user = UserModel.objects.create(
             username="user10",
             password=make_password("1010abc!"),
             fullname="user10",
             email="user10@gmail.com",
             phone="010-1010-1010",
+            region=RegionModel.objects.get(id=3))
+        
+        cls.user_1 = UserModel.objects.create(
+            username="user30",
+            password=make_password("3030abc!"),
+            fullname="user30",
+            email="user30@gmail.com",
+            phone="010-3030-3030",
             region=RegionModel.objects.get(id=3))
 
         cls.client = APIClient()
@@ -409,4 +409,25 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # username이 중복될 때
+    def test_modify_no_username(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user30",
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["username"][0], "user의 사용자 계정은/는 이미 존재합니다.")
         
