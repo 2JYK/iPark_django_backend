@@ -762,5 +762,23 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["phone"][0], "이 필드는 blank일 수 없습니다.")
         
-    
+    # region만 변경할 때
+    def test_modify_only_phone(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user10",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data["region"], 4)
         
