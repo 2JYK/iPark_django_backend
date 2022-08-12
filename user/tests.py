@@ -318,6 +318,14 @@ class UserLoginTest(APITestCase):
         
         
 # 회원정보 수정 및 회원탈퇴 테스트
+""" 
+회원정보를 수정할 때, 두 가지의 경우로 나누어진다. 
+1. 비밀번호를 제외한 정보들만 변경할 때
+2. 비밀번호까지 전부 다 변경할 떄
+
+회원정보를 변경할 때 partial=True로 인해 변경하고 싶은 정보만 변경할 수 있다. 
+하지만 이 경우에는 빈 값을 넣으면 기본 validator에 의해 걸러지기 때문에 원래 가지고 있던 값을 넣어줘야 한다. 
+"""
 class UserInfoModifyDeleteTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
@@ -368,6 +376,25 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         self.assertEqual(response.status_code, 201)
     
+    # username만 변경될 때
+    def test_modify_only_username(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 201)
+        
     # username이 없을 때
     def test_modify_no_username(self):
         url = reverse("user_view")
@@ -390,7 +417,7 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
         
     # username의 자릿수가 모자랄 때
-    def test_modify_no_username(self):
+    def test_modify_wrong_username(self):
         url = reverse("user_view")
         data_for_change = {
             "username" : "",
@@ -411,7 +438,7 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.data["username"][0], "이 필드는 blank일 수 없습니다.")
         
     # username이 중복될 때
-    def test_modify_no_username(self):
+    def test_modify_same_username(self):
         url = reverse("user_view")
         data_for_change = {
             "username" : "user30",
@@ -430,4 +457,5 @@ class UserInfoModifyDeleteTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "user의 사용자 계정은/는 이미 존재합니다.")
-        
+    
+    
