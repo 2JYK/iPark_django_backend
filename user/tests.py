@@ -325,6 +325,7 @@ class UserLoginTest(APITestCase):
 
 회원정보를 변경할 때 partial=True로 인해 변경하고 싶은 정보만 변경할 수 있다. 
 하지만 이 경우에는 빈 값을 넣으면 기본 validator에 의해 걸러지기 때문에 원래 가지고 있던 값을 넣어줘야 한다. 
+* region의 경우, 프론트에서 기본값이 강남구로 되어 있기 때문에 없을 경우는 따로 테스트하지 않음
 """
 class UserInfoModifyDeleteTest(APITestCase):
     @classmethod
@@ -746,7 +747,7 @@ class UserInfoModifyDeleteTest(APITestCase):
         url = reverse("user_view")
         data_for_change = {
             "username" : "user10",
-            "password" : "1010abc!",
+            "password" : "2020abc!",
             "fullname" : "user10",
             "email" : "user20@gmail.com",
             "phone" : "",
