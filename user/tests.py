@@ -602,3 +602,23 @@ class UserInfoModifyDeleteTest(APITestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data["fullname"], "us")
+        
+    # fullname이 중복될 때 (사용자의 이름은 동명이인이 있을 수 있어 별도의 제약을 걸어놓지 않음)
+    def test_modify_no_fullname(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "user30",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 201)
