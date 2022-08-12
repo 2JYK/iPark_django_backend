@@ -922,3 +922,23 @@ class AlterPasswordTest(APITestCase):
         self.assertEqual(response.data["message"], "존재하지 않는 사용자입니다.")
         self.assertEqual(response_2.status_code, 404)
         self.assertEqual(response_2.data["message"], "존재하지 않는 사용자입니다.")
+        
+    # username 또는 email을 입력하지 경우
+    def test_post_no_username_or_email(self):
+        url = reverse("alter_password_view")
+        user_data = {
+            "username" : "",
+            "email" : "user10@gmail.com"
+        }
+        user_data_2 = {
+            "username" : "user10",
+            "email" : ""
+        }
+        
+        response = self.client.post(url, user_data)
+        response_2 = self.client.post(url, user_data_2)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["message"], "아이디 또는 이메일 값을 제대로 입력해주세요.")
+        self.assertEqual(response_2.status_code, 400)
+        self.assertEqual(response_2.data["message"], "아이디 또는 이메일 값을 제대로 입력해주세요.")
