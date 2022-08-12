@@ -1058,3 +1058,59 @@ class UserVerifyTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["email"], "user10@gmail.com")
         self.assertEqual(response.data["phone"], "010-1010-1010")
+        
+    # 정보를 잘못 입력한 경우
+    def test_user_verify_with_wrong_info(self):
+        url = reverse("user_verification_view")
+        data = {
+            "username" : "user20",
+            "password" : "1010abc!"
+        }
+        data_2 = {
+            "username" : "user10",
+            "password" : "1011abc!"
+        }
+        
+        response = self.client.post(
+            path=url, 
+            data=data,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        response_2 = self.client.post(
+            path=url, 
+            data=data_2,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data["message"], "비밀번호가 일치하지 않습니다.")
+        self.assertEqual(response_2.status_code, 404)
+        self.assertEqual(response_2.data["message"], "비밀번호가 일치하지 않습니다.")
+        
+    # 정보를 입력하지 않은 경우
+    def test_user_verify_with_wrong_info(self):
+        url = reverse("user_verification_view")
+        data = {
+            "username" : "",
+            "password" : "1010abc!"
+        }
+        data_2 = {
+            "username" : "user10",
+            "password" : ""
+        }
+        
+        response = self.client.post(
+            path=url, 
+            data=data,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        response_2 = self.client.post(
+            path=url, 
+            data=data_2,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["message"], "아이디를 제대로 입력해주세요.")
+        self.assertEqual(response_2.status_code, 400)
+        self.assertEqual(response_2.data["message"], "비밀번호 값을 제대로 입력해주세요.")
