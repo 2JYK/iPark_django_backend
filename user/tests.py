@@ -973,7 +973,23 @@ class AlterPasswordTest(APITestCase):
             "new_password" : "abcde10!",
             "rewrite_password" : "abcde20!"
         }
+        password_data_2 = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "abcde10!",
+            "rewrite_password" : ""
+        }
+        password_data_3 = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "",
+            "rewrite_password" : "abcde10!"
+        }
         
         response = self.client.put(url, password_data)
+        response_2 = self.client.put(url, password_data_2)
+        response_3 = self.client.put(url, password_data_3)
         
         self.assertEqual(response.data["message"], "두 비밀번호가 일치하지 않습니다.")
+        self.assertEqual(response_2.data["message"], "비밀번호를 제대로 입력해주세요.")
+        self.assertEqual(response_3.data["message"], "비밀번호를 제대로 입력해주세요.")
