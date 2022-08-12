@@ -519,7 +519,28 @@ class UserInfoModifyDeleteTest(APITestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["password"][0], "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다.")
+    
+    # password가 중복될 때
+    def test_modify_same_password(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
         
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["password"], "현재 사용중인 비밀번호와 동일한 비밀번호는 입력할 수 없습니다.")
+    
     # fullname만 변경할 때
     def test_modify_only_fullname(self):
         url = reverse("user_view")
