@@ -581,3 +581,24 @@ class UserInfoModifyDeleteTest(APITestCase):
         
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["fullname"][0], "이 필드는 blank일 수 없습니다.")
+        
+    # fullname의 자릿수 테스트 (현재 걸어놓은 제약이 없음)
+    def test_modify_fullname_no_limit(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020abc!",
+            "fullname" : "us",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data["fullname"], "us")
