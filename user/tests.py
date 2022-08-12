@@ -950,3 +950,30 @@ class AlterPasswordTest(APITestCase):
         self.assertEqual(response_2.status_code, 400)
         self.assertEqual(response_2.data["message"], "아이디 또는 이메일 값을 제대로 입력해주세요.")
         
+    # 비밀번호 변경    
+    def test_alter_password(self):
+        url = reverse("alter_password_view")
+        password_data = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "abcde10!",
+            "rewrite_password" : "abcde10!"
+        }
+        
+        response = self.client.put(url, password_data)
+        
+        self.assertEqual(response.data["message"], "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요.")
+        
+    # 두 비밀번호가 일치하지 않을 경우    
+    def test_alter_password_not_same_password(self):
+        url = reverse("alter_password_view")
+        password_data = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "abcde10!",
+            "rewrite_password" : "abcde20!"
+        }
+        
+        response = self.client.put(url, password_data)
+        
+        self.assertEqual(response.data["message"], "두 비밀번호가 일치하지 않습니다.")
