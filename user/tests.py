@@ -499,4 +499,23 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["password"][0], "이 필드는 blank일 수 없습니다.")
         
-    
+    # password의 양식이 틀렸을 때
+    def test_modify_wrong_password(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user20",
+            "password" : "2020ab",
+            "fullname" : "user20",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 4
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data["password"][0], "비밀번호는 8 자리 이상이며 최소 하나 이상의 영문자, 숫자, 특수문자가 필요합니다.")
