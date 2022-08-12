@@ -458,4 +458,24 @@ class UserInfoModifyDeleteTest(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data["username"][0], "user의 사용자 계정은/는 이미 존재합니다.")
     
+    # password만 변경할 때
+    def test_modify_only_password(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "username" : "user10",
+            "password" : "2020abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "region" : 3
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 201)
+    
     
