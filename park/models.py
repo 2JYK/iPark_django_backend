@@ -33,11 +33,6 @@ class Park(models.Model):
         self.check_count = self.check_count + 1
         self.save()
 
-    @property
-    def update_counter(self):
-        self.check_count = self.check_count + 1
-        self.save()
-
 
 class ParkOption(models.Model):
     park = models.ForeignKey(Park, on_delete=models.CASCADE)
