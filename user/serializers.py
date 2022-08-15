@@ -97,7 +97,7 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         for key, value in validated_data.items():
             if key == "password":
-                user = UserModel.objects.get(Q(username=validated_data["username"]) & Q(email=validated_data["email"]))
+                user = instance
                 if check_password(value, user.password):
                     raise serializers.ValidationError(
                         detail={"password": "현재 사용중인 비밀번호와 동일한 비밀번호는 입력할 수 없습니다."})

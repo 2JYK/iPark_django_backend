@@ -59,22 +59,13 @@ class UserView(APIView):
 class FindUserInfoView(APIView):
     # 아이디 찾기
     def post(self, request):
-        correct_email = re.compile("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-        correct_phone = re.compile("\d{3}-\d{4}-\d{4}")
-        
-        email_input = correct_email.match(request.data["email"])
-        phone_input = correct_phone.match(request.data["phone"])
-        
-        if email_input == None or phone_input == None:
-            return Response({"message": "이메일 혹은 핸드폰 번호 양식이 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            try:
-                searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
-                if searched_username:
-                    return Response({"username" : searched_username}, status=status.HTTP_200_OK)
-                
-            except UserModel.DoesNotExist:
-                return Response({"message": "사용자가 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            searched_username = UserModel.objects.get(Q(email=request.data["email"]) & Q(phone=request.data["phone"])).username
+            if searched_username:
+                return Response({"username" : searched_username}, status=status.HTTP_200_OK)
+            
+        except UserModel.DoesNotExist:
+            return Response({"message": "사용자가 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)
         
 
 class AlterPasswordView(APIView):
@@ -87,7 +78,6 @@ class AlterPasswordView(APIView):
             return Response({"message": "아이디 또는 이메일 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if email_input == None:
-                print(email_input)
                 return Response({"message": "이메일 형식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 try: 
@@ -135,12 +125,15 @@ class UserVerifyView(APIView):
 
         if request.data["password"] == "":
             return Response({"message": "비밀번호 값을 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+        # 프론트에 사용자의 username이 띄워져 있지만, 사용자가 변경을 할 경우를 대비
+        elif request.data["username"] == "":
+            return Response({"message": "아이디를 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             if password_input == None:
                 return Response({"message": "비밀번호 형식에 맞게 작성해주세요."}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 user = authenticate(username=request.data["username"], password=request.data["password"])
-
+                
                 if request.user == user:
                     user = UserModel.objects.get(username=request.data["username"])
                     user_data = UserSerializer(user)
