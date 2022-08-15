@@ -31,7 +31,7 @@ class Region(models.Model):
 
 
 class User(AbstractBaseUser):
-    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users")
+    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users", through="park.BookMark")
     username = models.CharField("사용자 계정", max_length=30, unique=True)
     password = models.CharField("비밀번호", max_length=128)
     fullname = models.CharField("사용자 이름", max_length=20)

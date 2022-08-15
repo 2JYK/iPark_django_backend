@@ -1,3 +1,4 @@
+import re
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
@@ -7,7 +8,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
-import re
 
 from user.jwt_claim_serializer import iParkTokenObtainPairSerializer
 from user.serializers import UserSerializer
