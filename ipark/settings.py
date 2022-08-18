@@ -21,12 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "BREAD")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", 1))
 
-ALLOWED_HOSTS = []
+if os.environ.get('DJANGO_ALLOWED_HOSTS'):
+		ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+else:
+		ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,11 +88,14 @@ WSGI_APPLICATION = 'ipark.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('SQL_ENGINE',"django.db.backends.sqlite3"),
+        'NAME': os.environ.get('SQL_DATABASE', BASE_DIR / "db.sqlite3"),
+        'USER': os.environ.get('SQL_USER', 'user'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -126,10 +132,21 @@ REST_FRAMEWORK = {
 }
 
 # CORS 설정
-CORS_ALLOWED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = (
     "http://localhost:5500",
     "http://127.0.0.1:5500",
-]
+    "https://back.ilovepark.net",
+    "https://www.ilovepark.net",
+)
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://back.ilovepark.net",
+    "https://www.ilovepark.net",
+)
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -205,11 +222,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
 
-
-MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 100000000
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100000000
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

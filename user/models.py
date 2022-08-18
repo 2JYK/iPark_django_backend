@@ -5,7 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
-            raise ValueError('사용자 계정을 만들어주세요')
+            raise ValueError("사용자 계정을 만들어주세요")
         user = self.model(
             username=username,
         )
@@ -31,20 +31,19 @@ class Region(models.Model):
 
 
 class User(AbstractBaseUser):
-    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users")
+    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users", through="park.BookMark")
     username = models.CharField("사용자 계정", max_length=30, unique=True)
     password = models.CharField("비밀번호", max_length=128)
     fullname = models.CharField("사용자 이름", max_length=20)
-    email = models.EmailField("이메일", max_length=100)
+    email = models.EmailField("이메일", max_length=100, unique=True)
     phone = models.CharField("핸드폰 번호", max_length=20)
-    birthday = models.DateField("생년월일", null=True)
     region = models.ForeignKey(Region, verbose_name="지역", on_delete=models.SET_NULL, null=True)
     join_date = models.DateTimeField("가입일자", auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 
     objects = UserManager()

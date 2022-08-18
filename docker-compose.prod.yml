@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - web
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+  web:
+    build: .
+    command: gunicorn ipark.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    working_dir: /usr/src/app/
+    volumes:
+      - ./:/usr/src/app/
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+    env_file:
+      - ./.env.prod
+    expose:
+      - 8000
+
+volumes:
+  static_volume:
+  media_volume: 
