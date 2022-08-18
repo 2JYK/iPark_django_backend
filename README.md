@@ -237,6 +237,8 @@
 <br>
 
 # 🎨 API 설계
+<img width="959" alt="스크린샷 2022-08-18 오후 1 13 48" src="https://user-images.githubusercontent.com/99387514/185292781-29cb132d-5042-4c6a-a6c9-97a42363df09.png">
+
 ![image](https://user-images.githubusercontent.com/89643366/182299045-8cedbd5e-88a9-443f-95d2-dca8a0a50c0e.png)
 
 ![image](https://user-images.githubusercontent.com/89643366/182299080-8667c4e5-ecc1-4afe-9119-56c2ff46216d.png)
