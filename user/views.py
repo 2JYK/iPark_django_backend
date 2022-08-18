@@ -148,6 +148,7 @@ class KakaoLoginView(APIView):
     def post(self, request):
         access_token = request.data["access_token"]
         email = request.data["email"]
+        username = request.data["username"]
    
         try:
             user = UserModel.objects.get(email=email)
@@ -162,7 +163,8 @@ class KakaoLoginView(APIView):
                 return Response({"res_code": 2, 
                                  "message" : "로그인 성공",
                                  "refresh": str(refresh), 
-                                 "access": str(refresh.access_token)
+                                 "access": str(refresh.access_token),
+                                 "username": username
                                  }, status=status.HTTP_200_OK)
         
         except UserModel.DoesNotExist:
