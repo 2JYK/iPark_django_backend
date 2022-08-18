@@ -239,8 +239,7 @@
 # 🎨 API 설계
 <img width="959" alt="스크린샷 2022-08-18 오후 1 13 48" src="https://user-images.githubusercontent.com/99387514/185292781-29cb132d-5042-4c6a-a6c9-97a42363df09.png">
 
-![image](https://user-images.githubusercontent.com/89643366/182299045-8cedbd5e-88a9-443f-95d2-dca8a0a50c0e.png)
+<img width="946" alt="스크린샷 2022-08-18 오후 1 19 53" src="https://user-images.githubusercontent.com/99387514/185292957-a321a78f-35e2-415e-898a-319c8ec9ca49.png">
 
-![image](https://user-images.githubusercontent.com/89643366/182299080-8667c4e5-ecc1-4afe-9119-56c2ff46216d.png)
+<img width="927" alt="스크린샷 2022-08-18 오후 1 20 09" src="https://user-images.githubusercontent.com/99387514/185292976-b68e1ae6-630c-4bcf-a510-47db46ccd59e.png">
 
-![image](https://user-images.githubusercontent.com/89643366/182299106-520fc696-49f5-4cc7-a304-3612e26c8ec3.png)
