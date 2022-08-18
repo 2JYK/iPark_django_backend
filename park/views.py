@@ -115,7 +115,7 @@ class ParkCommentView(APIView):
 
         if comment_serializer.is_valid():
             comment_serializer.save(user=request.user)
-    
+            
             park.check_count -= 1
             park.save()
             
