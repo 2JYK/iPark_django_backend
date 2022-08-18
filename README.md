@@ -225,14 +225,9 @@
 <br>
 
 # 🎯 데이터베이스
-<details>
-<summary> ERD Cloud </summary>
-<div markdown="1">
 
 ![image](https://user-images.githubusercontent.com/89643366/182328335-a72858b8-baa5-401f-b183-9cf9d25fdca8.png)
 
-</div>
-</details>
 
 <br>
 
