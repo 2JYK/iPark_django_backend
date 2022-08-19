@@ -30,14 +30,17 @@ class ParkCommentTest(APITestCase):
     def setUp(self):
         self.access_token = self.client.post(reverse('ipark_token'), self.user_data).data['access']
     
-    # 작성 : 로그인 X
-    def test_fail_if_not_logged_in(self):
+    def test_get_park_comments(self):
+        url = reverse("park_comment_create", kwargs={'park_id':1})
+        response = self.client.get(url, self.comment_data)
+        self.assertEqual(response.status_code, 200)
+        
+    def test_fail_create_comment_if_not_logged_in(self):
         url = reverse("park_comment_create", kwargs={'park_id':1})
         response = self.client.post(url, self.comment_data)
         self.assertEqual(response.status_code, 401)  
     
-    # 작성 : 로그인 O
-    def test_create_comment(self):
+    def test_successful_create_comment(self):
         response = self.client.post(
             path=reverse("park_comment_create", kwargs={'park_id':1}),
             data=self.comment_data,
@@ -45,8 +48,7 @@ class ParkCommentTest(APITestCase):
             )
         self.assertEqual(response.status_code, 200)
         
-    # 작성 : 로그인 O 내용입력 X
-    def test_fail_no_comment(self):
+    def test_fail_create_comment_no_content(self):
         response = self.client.post(
             path=reverse("park_comment_create", kwargs={'park_id':1}),
             data={"username" : "sugisugi",
