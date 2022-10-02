@@ -21,6 +21,8 @@ frontend repo -> https://github.com/2JYK/iPark_frontend<br>
 <br>
 
 # 🚀 역할
+
+### 전체 역할
 ![역할](https://user-images.githubusercontent.com/89643366/182292718-d8d7c112-19dd-4550-bb73-7c6ce97cc63b.png)
 
 <br>
